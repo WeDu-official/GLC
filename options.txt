@@ -1,0 +1,3 @@
+$<set no statement function calling>
+False
+/set no statement function calling>$

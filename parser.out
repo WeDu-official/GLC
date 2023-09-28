@@ -1,0 +1,71 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> expression
+Rule 1     expression -> expression example expression
+Rule 2     expression -> NUMBER
+
+Terminals, with rules where they appear
+
+NUMBER               : 2
+error                : 
+example              : 1
+
+Nonterminals, with rules where they appear
+
+expression           : 1 1 0
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . expression
+    (1) expression -> . expression example expression
+    (2) expression -> . NUMBER
+
+    NUMBER          shift and go to state 2
+
+    expression                     shift and go to state 1
+
+state 1
+
+    (0) S' -> expression .
+    (1) expression -> expression . example expression
+
+    example         shift and go to state 3
+
+
+state 2
+
+    (2) expression -> NUMBER .
+
+    example         reduce using rule 2 (expression -> NUMBER .)
+    $end            reduce using rule 2 (expression -> NUMBER .)
+
+
+state 3
+
+    (1) expression -> expression example . expression
+    (1) expression -> . expression example expression
+    (2) expression -> . NUMBER
+
+    NUMBER          shift and go to state 2
+
+    expression                     shift and go to state 4
+
+state 4
+
+    (1) expression -> expression example expression .
+    (1) expression -> expression . example expression
+
+  ! shift/reduce conflict for example resolved as shift
+    $end            reduce using rule 1 (expression -> expression example expression .)
+    example         shift and go to state 3
+
+  ! example         [ reduce using rule 1 (expression -> expression example expression .) ]
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for example in state 4 resolved as shift
