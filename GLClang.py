@@ -67,28 +67,54 @@ def clear2():
     with open('lacodeasavea.txt', 'w') as la2:
         la2.write('')
     la2.close()
-def run_pre(programminglanguage,filename,run_type):
-    """this function runs filename that is .gcf or .PLFF and this function
-can compile the code or compile and run the code"""
-    if run_type == 'True':
-        CAR = 1
-        run(programminglanguage,CAR,True,False,filename,'','',False,True,False)
-    if run_type == 'False':
-        CAR = 2
-        run(programminglanguage, CAR, True, False, filename, '', '', False, True, False)
-def allrun_pre(filename,run_type,runorder=None):
-    """this function runs filename that is .gcf or .PLFF and this function
-can compile the code or compile and run the code"""
+def run_pre(filename:str,CAROCO:int,run_type:bool,programminglanguage:str):
+    run(programminglanguage,CAROCO,True,False,filename,'','',False,True,False)
+def allrun_pre(filename:str,CAROCO:int,run_type:bool,runorder=None):
     if runorder is None:
         runorder = []
-    if run_type == 'True':
-        CAR = 1
-        for i in runorder:
-            run(i,CAR,True,False,filename,'','',False,True,False)
-    if run_type == 'False':
-        CAR = 2
-        for i in runorder:
-            run(i,CAR,True,False,filename,'','',False,True,False)
+    for i in runorder:
+        run(i,CAROCO,run_type,False,filename,'','',False,True,False)
+def allparallelrun_pre(filename:str,CAROCO:int,run_type:bool,PRDF:str,runorder=None):
+    if runorder is None:
+        runorder = []
+    for i in runorder:
+        run(i,CAROCO,run_type,False,filename,'',PRDF,True,True,False)
+def run_precode(code:str,CAROCO:int,run_type:bool,programminglanguage:str):
+    run(programminglanguage,CAROCO,True,False,'',code,'',False,True,False)
+def allrun_precode(code:str,CAROCO:int,run_type:bool,runorder=None):
+    if runorder is None:
+        runorder = []
+    for i in runorder:
+        run(i,CAROCO,run_type,False,'',code,'',False,True,False)
+def allparallelrun_precode(code:str,CAROCO:int,run_type:bool,PRDF:str,runorder=None):
+    if runorder is None:
+        runorder = []
+    for i in runorder:
+        run(i,CAROCO,run_type,False,'',code,PRDF,True,True,False)
+def run_precos(programminglanguage:str,filename:str,run_type:bool,CAROCO:int,returned:bool,showrunmessage:bool,showmessageswithwarnings:bool):
+    run(programminglanguage,CAROCO,run_type,returned,filename,'','',False,showrunmessage,showmessageswithwarnings)
+def allrun_precos(filename:str,CAROCO:int,run_type:bool,returned:bool,showrunmessage:bool,showmessageswithwarnings:bool,runorder=None):
+    if runorder is None:
+        runorder = []
+    for i in runorder:
+        run(i,CAROCO,run_type,returned,filename,'','',False,showrunmessage,showmessageswithwarnings)
+def allparallelrun_precos(filename:str,CAROCO:int,run_type:bool,returned:bool,showrunmessage:bool,showmessageswithwarnings:bool,PRDF:str='',runorder=None):
+    if runorder is None:
+        runorder = []
+    for i in runorder:
+        run(i,CAROCO,run_type,returned,filename,'',PRDF,True,showrunmessage,showmessageswithwarnings)
+def run_precodecos(programminglanguage:str,code:str,run_type:bool,CAROCO:int,returned:bool,showrunmessage:bool,showmessageswithwarnings:bool):
+    run(programminglanguage,CAROCO,run_type,returned,'',code,'',False,showrunmessage,showmessageswithwarnings)
+def allrun_precodecos(code:str,CAROCO:int,run_type:bool,returned:bool,showrunmessage:bool,showmessageswithwarnings:bool,runorder=None):
+    if runorder is None:
+        runorder = []
+    for i in runorder:
+        run(i,CAROCO,run_type,returned,'',code,'',False,showrunmessage,showmessageswithwarnings)
+def allparallelrun_precodecos(code:str,CAROCO:int,run_type:bool,returned:bool,showrunmessage:bool,showmessageswithwarnings:bool,PRDF:str='',runorder=None):
+    if runorder is None:
+        runorder = []
+    for i in runorder:
+        run(i,CAROCO,run_type,returned,'',code,PRDF,True,showrunmessage,showmessageswithwarnings)
 def parallelrun(programminglanguage:str,CAROCO:int,runned:bool,returned:bool,file_path:str='',code:str='',PRDF:str='',Parallelrun:bool=False,showrunmessage:bool=True,showmessageshowingwarnings:bool=False):
     run(programminglanguage,CAROCO,runned,returned,file_path,code,PRDF,Parallelrun,showrunmessage,showmessageshowingwarnings)
 def parallelrunfilesgenrator(filename:str,fileformat:str):
@@ -147,19 +173,19 @@ def run_code(filename):
     if '.html' in data:
         os.system(f"{data}")
 #basic run function that uses 5 another functions
-def allbasicrun_pre(runorder,readenfile,writeenfile,runtype):
+def allbasicrun_pre(runorder:str,readenfile:str,writeenfile:str,runtype:bool,CAROCO:int):
     """this function uses writedata and runmain,restart,readdata,clear2 functions to do run for
     main.gcf or main.PLFF without problems"""
     writedata_pre(readenfile, writeenfile)
-    allrun_pre(writeenfile,runtype,runorder)
+    allrun_pre(writeenfile,CAROCO,runtype,runorder)
     restart_pre(writeenfile)
     readdata_pre(readenfile, writeenfile)
     clear_pre(readenfile)
-def basicrun_pre(programminglanguage,readenfile,writeenfile,runtype):
+def basicrun_pre(programminglanguage:str,readenfile:str,writeenfile:str,runtype:bool,CAROCO:int):
     """this function uses writedata_pre and run_pre,restart_pre,readdata_pre,clear_pre functions to do run for
     filename that is .gcf or .PLFF without problems"""
     writedata_pre(readenfile, writeenfile)
-    run_pre(programminglanguage,writeenfile, runtype)
+    run_pre(writeenfile,CAROCO,runtype,programminglanguage)
     restart_pre(writeenfile)
     readdata_pre(readenfile, writeenfile)
     clear_pre(readenfile)

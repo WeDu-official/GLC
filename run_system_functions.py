@@ -9,15 +9,126 @@ import AFM
 import time
 import os
 import subprocess
-def compile(mode:str,file_path:str,code:str,programminglanguage:str):
+start_time = time.time()
+command2 = ''
+command = "python runned_code.py"
+token_message = ''
+token_message2 = ''
+token_message3 = ''
+token_message4 = ''
+programminglanguagefileformat = '.py'
+func_mapping_var = {}
+func_mapping_var2 = {}
+options_Reader = open('options.txt', 'r')
+options = options_Reader.read()
+options_Reader.close()
+def normal_function_mapping(code:str,function_mapping_variable:dict):
+    lines2 = code.strip().split("\n")
+    for s in range(len(lines2)):
+        for short, full in function_mapping_variable:
+            lines2[s] = lines2[s].replace(short, full)
+    codew = "\n".join(lines2)
+    return codew
+def find_between(filepath,first_word, second_word, occurrence):
+    file = open(filepath, 'r')
+    lines = file.readlines()
+    file.close()
+    first_line_number = None
+    second_line_number = None
+    count = 0
+
+    for i, line in enumerate(lines):
+        if first_word in line:
+            count += 1
+            if count == occurrence:
+                first_line_number = i
+        if second_word in line and count == occurrence:
+            second_line_number = i
+            break
+
+    if first_line_number is not None and second_line_number is not None:
+        words_between = []
+        for i in range(first_line_number + 1, second_line_number):
+            line = lines[i].strip()
+            words_between.append(lines[i])
+        return words_between
+    else:
+        return []  # If either first_word or second_word is not found in the file or occurrence is not found
+
+def find_between2(code:str,first_word, second_word, occurrence):
+    lines = code.strip().split("\n")
+    first_line_number = None
+    second_line_number = None
+    count = 0
+
+    for i, line in enumerate(lines):
+        if first_word in line:
+            count += 1
+            if count == occurrence:
+                first_line_number = i
+        if second_word in line and count == occurrence:
+            second_line_number = i
+            break
+
+    if first_line_number is not None and second_line_number is not None:
+        words_between = []
+        for i in range(first_line_number + 1, second_line_number):
+            line = lines[i].strip()
+            words_between.append(lines[i])
+        return words_between
+    else:
+        return []  # If either first_word or second_word is not found in the file or occurrence is not found
+def find_between2_2(code:str,first_word, second_word, occurrence):
+    lines = code.split("\n")
+    first_line_number = None
+    second_line_number = None
+    count = 0
+
+    for i, line in enumerate(lines):
+        if first_word in line:
+            count += 1
+            if count == occurrence:
+                first_line_number = i
+        if second_word in line and count == occurrence:
+            second_line_number = i
+            break
+
+    if first_line_number is not None and second_line_number is not None:
+        words_between = []
+        for i in range(first_line_number + 1, second_line_number):
+            line = lines[i].strip()
+            words_between.append(lines[i])
+        return words_between
+    else:
+        return []  # If either first_word or second_word is not found in the file or occurrence is not found
+
+def find_between3(text, firstword, secondword):
+    start_index = text.find(firstword) + len(firstword)
+    end_index = text.find(secondword)
+    if start_index == -1 or end_index == -1:
+        return None
+    return text[start_index:end_index]
+
+def list_to_string(lst):
+    string = ''.join(lst)
+    string = string.replace('\\n', '\n')
+    return string
+def list_to_string2(lst):
+    string = '\n'.join(lst)
+    string = string.replace('\\n', '\n')
+    return string
+def compile(mode:str,file_path:str,thecode:str,programminglanguage:str):
     command2 = ''
     options_Reader = open('options.txt', 'r')
-    if code == '' and file_path != '':
+    if thecode == '' and file_path != '':
         co = open(file_path,'r')
         code = co.read()
         co.close()
-    if code != '' and file_path == '':
-        code = code
+    if thecode != '' and file_path == '':
+        code = thecode
+    else:
+        print('no data')
+        code = ''
     options = options_Reader.read()
     SET_NO_STATEMENT_FUNCTION_CALLING = list_to_string(find_between2(options, '$<set no statement function calling>','/set no statement function calling>$', 1))
     options_Reader.close()
@@ -60,6 +171,9 @@ def compile(mode:str,file_path:str,code:str,programminglanguage:str):
     if programminglanguage == 'html':
         func_mapping_var = HAPFL.func_mapping.items()
         func_mapping_var2 = HAPFL.func_mapping.keys()
+    else:
+        func_mapping_var = PAPFL.func_mapping.items()
+        func_mapping_var2 = PAPFL.func_mapping.keys()
     if programminglanguage != 'python' and programminglanguage != 'C' and programminglanguage != 'c' and programminglanguage != 'java' and programminglanguage != 'javascript' and programminglanguage != 'JS' and programminglanguage != 'batch' and programminglanguage != 'kotlin' and programminglanguage != 'html':
         print("unknown programming language")
         exit()
@@ -77,13 +191,13 @@ def compile(mode:str,file_path:str,code:str,programminglanguage:str):
             data_4 = find_between(file_path, b[-5], b[-8], i + 1)
             data4 = list_to_string(data_4)
         if mode == 'c':
-            data1 = find_between(file_path, b[-7], b[-6], i + 1)
+            data1 = find_between2(code, b[-7], b[-6], i + 1)
             data = list_to_string(data1)
-            data2 = find_between(file_path, b[-5], b[-4], i + 1)
+            data2 = find_between2(code, b[-5], b[-4], i + 1)
             data_2 = list_to_string(data2)
-            data_3 = find_between(file_path, b[-7], b[-9], i + 1)
+            data_3 = find_between2(code, b[-7], b[-9], i + 1)
             data3 = list_to_string(data_3)
-            data_4 = find_between(file_path, b[-5], b[-8], i + 1)
+            data_4 = find_between2(code, b[-5], b[-8], i + 1)
             data4 = list_to_string(data_4)
         data1 = find_between2("\n".join(lines), b[-7], b[-6], i + 1)
         data = list_to_string(data1)
@@ -95,10 +209,10 @@ def compile(mode:str,file_path:str,code:str,programminglanguage:str):
         data_4 = list_to_string(data4)
         semi_fin_lines = code.strip().split("\n")
         code_texted = "\n".join(semi_fin_lines)
-        goto: str = find_between3(code_texted, b[-7], b[-6])
-        goto2: str = find_between3(code_texted, b[-5], b[-4])
-        goto3: str = find_between3(code_texted, b[-7], b[-9])
-        goto4: str = find_between3(code_texted, b[-5], b[-8])
+        goto = find_between3(code_texted, b[-7], b[-6])
+        goto2 = find_between3(code_texted, b[-5], b[-4])
+        goto3 = find_between3(code_texted, b[-7], b[-9])
+        goto4 = find_between3(code_texted, b[-5], b[-8])
         if goto == '' or goto == '\n' or goto == '\t' or goto == None:
             goto = ''
         if goto2 == '' or goto2 == '\n' or goto2 == '\t' or goto2 == None:
@@ -132,10 +246,10 @@ def compile(mode:str,file_path:str,code:str,programminglanguage:str):
             prt2 = f'print("{AFM.parser.parse(goto)}")'
             prt3 = f'{AFM.parser.parse(data_2)}'
             prt4 = f'{AFM.parser.parse(goto2)}'
-            prt5 = f'print("{normal_function_mapping(data_3, func_mapping_var)}")'
-            prt6 = f'print("{normal_function_mapping(goto3, func_mapping_var)}")'
-            prt7 = f'{normal_function_mapping(data_4, func_mapping_var)}'
-            prt8 = f'{normal_function_mapping(goto4, func_mapping_var)}'
+            prt5 = f'print("{normal_function_mapping(data_3, func_mapping_var)}")'# type: ignore
+            prt6 = f'print("{normal_function_mapping(goto3, func_mapping_var)}")'# type: ignore
+            prt7 = f'{normal_function_mapping(data_4, func_mapping_var)}'# type: ignore
+            prt8 = f'{normal_function_mapping(goto4, func_mapping_var)}'# type: ignore
             token_message = '#empty tokened function $'
             token_message2 = '#empty tokened function %'
             token_message3 = '#empty function $'
@@ -145,10 +259,10 @@ def compile(mode:str,file_path:str,code:str,programminglanguage:str):
             prt2 = f'printf("{AFM.parser.parse(goto)}");'
             prt3 = f'{AFM.parser.parse(data_2)}'
             prt4 = f'{AFM.parser.parse(goto2)}'
-            prt5 = f'printf("{normal_function_mapping(data_3, func_mapping_var)}");'
-            prt6 = f'printf("{normal_function_mapping(goto3, func_mapping_var)}");'
-            prt7 = f'{normal_function_mapping(data_4, func_mapping_var)}'
-            prt8 = f'{normal_function_mapping(goto4, func_mapping_var)}'
+            prt5 = f'printf("{normal_function_mapping(data_3, func_mapping_var)}");'# type: ignore
+            prt6 = f'printf("{normal_function_mapping(goto3, func_mapping_var)}");'# type: ignore
+            prt7 = f'{normal_function_mapping(data_4, func_mapping_var)}'# type: ignore
+            prt8 = f'{normal_function_mapping(goto4, func_mapping_var)}'# type: ignore
             token_message = '//empty tokened function $'
             token_message2 = '//empty tokened function %'
             token_message3 = '//#empty function $'
@@ -158,10 +272,10 @@ def compile(mode:str,file_path:str,code:str,programminglanguage:str):
             prt2 = f'System.out.println("{AFM.parser.parse(goto)}");'
             prt3 = f'{AFM.parser.parse(data_2)}'
             prt4 = f'{AFM.parser.parse(goto2)}'
-            prt5 = f'System.out.println("{normal_function_mapping(data_3, func_mapping_var)}");'
-            prt6 = f'System.out.println("{normal_function_mapping(goto3, func_mapping_var)}");'
-            prt7 = f'{normal_function_mapping(data_4, func_mapping_var)}'
-            prt8 = f'{normal_function_mapping(goto4, func_mapping_var)}'
+            prt5 = f'System.out.println("{normal_function_mapping(data_3, func_mapping_var)}");'# type: ignore
+            prt6 = f'System.out.println("{normal_function_mapping(goto3, func_mapping_var)}");'# type: ignore
+            prt7 = f'{normal_function_mapping(data_4, func_mapping_var)}' # type: ignore
+            prt8 = f'{normal_function_mapping(goto4, func_mapping_var)}'# type: ignore
             token_message = '//empty tokened function $'
             token_message2 = '//empty tokened function %'
             token_message3 = '//#empty function $'
@@ -171,10 +285,10 @@ def compile(mode:str,file_path:str,code:str,programminglanguage:str):
             prt2 = f'console.log("{AFM.parser.parse(goto)}")'
             prt3 = f'{AFM.parser.parse(data_2)}'
             prt4 = f'{AFM.parser.parse(goto2)}'
-            prt5 = f'console.log("{normal_function_mapping(data_3, func_mapping_var)}")'
-            prt6 = f'console.log("{normal_function_mapping(goto3, func_mapping_var)}")'
-            prt7 = f'{normal_function_mapping(data_4, func_mapping_var)}'
-            prt8 = f'{normal_function_mapping(goto4, func_mapping_var)}'
+            prt5 = f'console.log("{normal_function_mapping(data_3, func_mapping_var)}")'# type: ignore
+            prt6 = f'console.log("{normal_function_mapping(goto3, func_mapping_var)}")'# type: ignore
+            prt7 = f'{normal_function_mapping(data_4, func_mapping_var)}'# type: ignore
+            prt8 = f'{normal_function_mapping(goto4, func_mapping_var)}'# type: ignore
             token_message = '//empty tokened function $'
             token_message2 = '//empty tokened function %'
             token_message3 = '//empty function $'
@@ -184,10 +298,10 @@ def compile(mode:str,file_path:str,code:str,programminglanguage:str):
             prt2 = f'echo {AFM.parser.parse(goto)}'
             prt3 = f'{AFM.parser.parse(data_2)}'
             prt4 = f'{AFM.parser.parse(goto2)}'
-            prt5 = f'echo {normal_function_mapping(data_3, func_mapping_var)}'
-            prt6 = f'echo {normal_function_mapping(goto3, func_mapping_var)}'
-            prt7 = f'{normal_function_mapping(data_4, func_mapping_var)}'
-            prt8 = f'{normal_function_mapping(goto4, func_mapping_var)}'
+            prt5 = f'echo {normal_function_mapping(data_3, func_mapping_var)}'# type: ignore
+            prt6 = f'echo {normal_function_mapping(goto3, func_mapping_var)}'# type: ignore
+            prt7 = f'{normal_function_mapping(data_4, func_mapping_var)}'# type: ignore
+            prt8 = f'{normal_function_mapping(goto4, func_mapping_var)}'# type: ignore
             token_message = 'echo empty tokened function $'
             token_message2 = 'echo empty tokened function %'
             token_message3 = 'echo empty function $'
@@ -197,10 +311,10 @@ def compile(mode:str,file_path:str,code:str,programminglanguage:str):
             prt2 = f'println("{AFM.parser.parse(goto)}")'
             prt3 = f'{AFM.parser.parse(data_2)}'
             prt4 = f'{AFM.parser.parse(goto2)}'
-            prt5 = f'println("{normal_function_mapping(data_3, func_mapping_var)}")'
-            prt6 = f'println("{normal_function_mapping(goto3, func_mapping_var)}")'
-            prt7 = f'{normal_function_mapping(data_4, func_mapping_var)}'
-            prt8 = f'{normal_function_mapping(goto4, func_mapping_var)}'
+            prt5 = f'println("{normal_function_mapping(data_3, func_mapping_var)}")'# type: ignore
+            prt6 = f'println("{normal_function_mapping(goto3, func_mapping_var)}")'# type: ignore
+            prt7 = f'{normal_function_mapping(data_4, func_mapping_var)}'# type: ignore
+            prt8 = f'{normal_function_mapping(goto4, func_mapping_var)}'# type: ignore
             token_message = '//empty tokened function $'
             token_message2 = '//empty tokened function %'
             token_message3 = '//empty function $'
@@ -210,10 +324,10 @@ def compile(mode:str,file_path:str,code:str,programminglanguage:str):
             prt2 = f'<p>{AFM.parser.parse(goto)}</p>'
             prt3 = f'{AFM.parser.parse(data_2)}'
             prt4 = f'{AFM.parser.parse(goto2)}'
-            prt5 = f'<p>{normal_function_mapping(data_3, func_mapping_var)}</p>'
-            prt6 = f'<p>{normal_function_mapping(goto3, func_mapping_var)}</p>'
-            prt7 = f'{normal_function_mapping(data_4, func_mapping_var)}'
-            prt8 = f'{normal_function_mapping(goto4, func_mapping_var)}'
+            prt5 = f'<p>{normal_function_mapping(data_3, func_mapping_var)}</p>'# type: ignore
+            prt6 = f'<p>{normal_function_mapping(goto3, func_mapping_var)}</p>'# type: ignore
+            prt7 = f'{normal_function_mapping(data_4, func_mapping_var)}'# type: ignore
+            prt8 = f'{normal_function_mapping(goto4, func_mapping_var)}'# type: ignore
             token_message = '//empty tokened function $'
             token_message2 = '//empty tokened function %'
             token_message3 = '//empty function $'
@@ -299,48 +413,57 @@ def compile(mode:str,file_path:str,code:str,programminglanguage:str):
 def runner(code:str,programminglanguage:str,CAROCO:int,PRDF:str='',parallelrun:bool=False,showrunmessage:bool=True,showmessageshowingwarnings:bool=False,returned:bool=False):
     global programminglanguagefileformat,command,command2
     if programminglanguage == 'python':
-        command2 = f'python {PRDF}'
+        if parallelrun == True:
+            command2 = f'python {PRDF}'
         pass
     if programminglanguage == 'C' or programminglanguage == 'c':
         programminglanguagefileformat = '.c'
         if CAROCO == 1:
             command = "gcc runned_code.c & a.exe"
-            command2 = f'gcc {PRDF} & a.exe'
+            if parallelrun == True:
+                command2 = f'gcc {PRDF} & a.exe'
         if CAROCO == 2:
-            command = "gcc runned_code.c"
-        else:
+            if parallelrun == True:
+                command = "gcc runned_code.c"
+        if CAROCO != 1 and CAROCO != 2:
             print('the value of CAROCO perimeter it is out of range or is not a integer value')
             exit()
     if programminglanguage == 'batch':
         programminglanguagefileformat = '.bat'
         command = "runned_code.bat"
-        command2 = f'{PRDF}'
+        if parallelrun == True:
+            command2 = f'{PRDF}'
     if programminglanguage == 'java':
         programminglanguagefileformat = '.java'
         command = "java runned_code.java"
-        command2 = f"java {PRDF}"
+        if parallelrun == True:
+            command2 = f"java {PRDF}"
     if programminglanguage == 'javascript' or programminglanguage == 'JS':
         programminglanguagefileformat = '.js'
         command = "node runned_code.js"
-        command2 = f"node {PRDF}"
+        if parallelrun == True:
+            command2 = f"node {PRDF}"
     if programminglanguage == 'html':
         programminglanguagefileformat = '.html'
         command = "runned_code.html"
-        command2 = f"{PRDF}"
+        if parallelrun == True:
+            command2 = f"{PRDF}"
     if programminglanguage == 'kotlin':
         programminglanguagefileformat = '.kt'
         if CAROCO == 1:
             command = "kotlinc runned_code.kt & kotlin Runned_codeKT.class"
-            data = PRDF
-            data1 = data
-            data2 = data1[0].upper() + data1[1:]
-            data3 = data2[:-2] + data2[-2:].upper()
-            data4 = data3[:-3] + data3[-2:].upper()
-            command2 = f"kotlinc {data1} & kotlin {data4}.class"
+            if parallelrun == True:
+                data = PRDF
+                data1 = data
+                data2 = data1[0].upper() + data1[1:]
+                data3 = data2[:-3] + data2[-2].upper()
+                command2 = f"kotlinc {data1} & kotlin {data3}.class"
+                print(command2)
         if CAROCO == 2:
             command = "kotlinc runned_code.kt"
-            command2 = f"kotlinc {PRDF}"
-        else:
+            if parallelrun == True:
+                command2 = f"kotlinc {PRDF}"
+        if CAROCO != 1 and CAROCO != 2:
             print('the value of CAROCO perimeter it is out of range or is not a integer value')
             exit()
     with open(f"runned_code{programminglanguagefileformat}", "w") as file:
@@ -361,7 +484,7 @@ def runner(code:str,programminglanguage:str,CAROCO:int,PRDF:str='',parallelrun:b
     if parallelrun == True and showrunmessage == True:
         os.system(f"echo the {PRDF} file running by using parallel run🔥")
     if parallelrun == False and showrunmessage == True:
-        print('note:running more than normal run like the allrun_pre or else make the compiler')
+        print('note:running more than normal run like the all run_pre or else make the compiler')
         print('shows the run time is add to the run time before it')
         print(f"{programminglanguage.upper()} Finished in {time_diff:.3f} seconds")
     if showmessageshowingwarnings == True and parallelrun == True and showrunmessage == True:
@@ -371,100 +494,8 @@ def runner(code:str,programminglanguage:str,CAROCO:int,PRDF:str='',parallelrun:b
     if returned == True:
         fooe = open("run_system_functions_AOC.txt", 'w')
         fooe.write(code)
-def normal_function_mapping(code:str,function_mapping_variable:dict):
-    lines2 = code.strip().split("\n")
-    for s in range(len(lines2)):
-        for short, full in function_mapping_variable:
-            lines2[s] = lines2[s].replace(short, full)
-    codew = "\n".join(lines2)
-    return codew
-def find_between(filepath,first_word, second_word, occurrence):
-    file = open(filepath, 'r')
-    lines = file.readlines()
-    file.close()
-    first_line_number = None
-    second_line_number = None
-    count = 0
-
-    for i, line in enumerate(lines):
-        if first_word in line:
-            count += 1
-            if count == occurrence:
-                first_line_number = i
-        if second_word in line and count == occurrence:
-            second_line_number = i
-            break
-
-    if first_line_number is not None and second_line_number is not None:
-        words_between = []
-        for i in range(first_line_number + 1, second_line_number):
-            line = lines[i].strip()
-            words_between.append(lines[i])
-        return words_between
-    else:
-        return []  # If either first_word or second_word is not found in the file or occurrence is not found
-
-def find_between2(code:str,first_word, second_word, occurrence):
-    lines = code.strip().split("\n")
-    first_line_number = None
-    second_line_number = None
-    count = 0
-
-    for i, line in enumerate(lines):
-        if first_word in line:
-            count += 1
-            if count == occurrence:
-                first_line_number = i
-        if second_word in line and count == occurrence:
-            second_line_number = i
-            break
-
-    if first_line_number is not None and second_line_number is not None:
-        words_between = []
-        for i in range(first_line_number + 1, second_line_number):
-            line = lines[i].strip()
-            words_between.append(lines[i])
-        return words_between
-    else:
-        return []  # If either first_word or second_word is not found in the file or occurrence is not found
-
-def find_between3(text, firstword, secondword):
-    start_index = text.find(firstword) + len(firstword)
-    end_index = text.find(secondword)
-    if start_index == -1 or end_index == -1:
-        return None
-    return text[start_index:end_index]
-
-def list_to_string(lst):
-    string = ''.join(lst)
-    string = string.replace('\\n', '\n')
-    return string
-code2 = ''
-start_time = time.time()
-command2 = ''
-command = "python runned_code.py"
-token_message = ''
-token_message2 = ''
-token_message3 = ''
-token_message4 = ''
-programminglanguagefileformat = '.py'
-func_mapping_var = {}
-func_mapping_var2 = {}
-options_Reader = open('options.txt', 'r')
-options = options_Reader.read()
-options_Reader.close()
 SET_NO_STATEMENT_FUNCTION_CALLING = list_to_string(find_between2(options, '$<set no statement function calling>','/set no statement function calling>$', 1))
-def run_code(mode:str,file_path:str,code:str,programminglanguage:str,CAROCO:int,runnned:bool,returned:bool,PRDF:str='',parallelrun:bool=False,showrunmessage:bool=True,showmessageshowingwarnings:bool=False):
-    global code2,start_time,command2,command,token_message,token_message2,token_message3,token_message4,programminglanguagefileformat,func_mapping_var,func_mapping_var2,options,SET_NO_STATEMENT_FUNCTION_CALLING
-    x = int(time.strftime('%Y%d%d%H%M%S'))
-    code = compile(mode,file_path,code,programminglanguage)
-    if runnned == True:
-        runner(code,programminglanguage,CAROCO,PRDF,parallelrun,showrunmessage,showmessageshowingwarnings,returned)
-    if runnned == False:
-        code2 = code
-        if returned == True:
-            return code2
-def run(programminglanguage:str, CAROCO:int, runned:bool, returned:bool, file_path:str='', code:str='', PRDF:str='', Parallelrun:bool=False, showrunmessage:bool=True, showmessageshowingwarnings:bool=False):
+def run(programminglanguage:str, CAROCO:int, runned:bool, returned:bool, file_path:str='', thecode:str='', PRDF:str='', Parallelrun:bool=False, showrunmessage:bool=True, showmessageshowingwarnings:bool=False):
     func_mapping_var = {}
     fl = open('run_system_functions_AOC.txt','w')
     fl.write('')
@@ -493,27 +524,45 @@ def run(programminglanguage:str, CAROCO:int, runned:bool, returned:bool, file_pa
                 for i in range(100000):
                     if programminglanguage != 'all':
                         if f'<{programminglanguage} part s>{i + 1}' in code1:
-                            code2 = list_to_string(find_between2(code1,f'<{programminglanguage} part s>{i + 1}', f'<{programminglanguage} part e>{i + 1}', 1))
+                            code2 = list_to_string2(find_between2_2(code1,f'<{programminglanguage} part s>{i + 1}', f'<{programminglanguage} part e>{i + 1}', 1))
                             py = open('run_system_functions_AOC.txt', 'a')
                             print(code2, file=py)
                             py.close()
-                if Parallelrun == True:
-                    run_code('f', 'run_system_functions_AOC.txt', '', programminglanguage, CAROCO, runned, returned,PRDF,Parallelrun,showrunmessage, showmessageshowingwarnings)
-                else:
-                    run_code('f', 'run_system_functions_AOC.txt', '', programminglanguage,CAROCO,runned,returned,showmessageshowingwarnings=showmessageshowingwarnings)
+                global start_time,command2,command,token_message,token_message2,token_message3,token_message4,programminglanguagefileformat,func_mapping_var2,options,SET_NO_STATEMENT_FUNCTION_CALLING
+                codeh = open('run_system_functions_AOC.txt', 'r')
+                helpercode = codeh.read()
+                codeh.close()
+                x = int(time.strftime('%Y%d%d%H%M%S'))
+                code = compile('c','',helpercode,programminglanguage)
+                if returned == True and runned == False:
+                    return code
+                if runned == True and returned == True:
+                    runner(code,programminglanguage,CAROCO,PRDF,Parallelrun,showrunmessage,showmessageshowingwarnings,returned) # type: ignore
+                    return code
+                if runned == True and returned == False:
+                    runner(code,programminglanguage,CAROCO,PRDF,Parallelrun,showrunmessage,showmessageshowingwarnings,returned) # type: ignore
         else:
             print(f"The file '{file_path}' does not exist")
     else:
         for i in range(100000):
-            if f'<{programminglanguage} part s>{i + 1}' in code:
-                code1 = list_to_string(find_between2(code, f'<{programminglanguage} part s>{i + 1}',f'<{programminglanguage} part e>{i + 1}', 1))
+            if f'<{programminglanguage} part s>{i + 1}' in thecode:
+                code1 = list_to_string2(find_between2(thecode, f'<{programminglanguage} part s>{i + 1}',f'<{programminglanguage} part e>{i + 1}', 1))
                 py = open('run_system_functions_AOC.txt', 'a')
                 print(code1, file=py)
                 py.close()
-        if Parallelrun == True:
-            run_code('c', '', code, programminglanguage, CAROCO, runned, returned,PRDF, Parallelrun,showrunmessage, showmessageshowingwarnings)
-        else:
-            run_code('c', '', code, programminglanguage, CAROCO, runned, returned,showmessageshowingwarnings=showmessageshowingwarnings)
+        global start_time,command2,command,token_message,token_message2,token_message3,token_message4,programminglanguagefileformat,func_mapping_var2,options,SET_NO_STATEMENT_FUNCTION_CALLING
+        codeh = open('run_system_functions_AOC.txt', 'r')
+        helpercode = codeh.read()
+        codeh.close()
+        x = int(time.strftime('%Y%d%d%H%M%S'))
+        code = compile('c','',helpercode,programminglanguage)
+        if returned == True and runned == False:
+            return code
+        if runned == True and returned == True:
+            runner(code,programminglanguage,CAROCO,PRDF,Parallelrun,showrunmessage,showmessageshowingwarnings,returned) # type: ignore
+            return code
+        if runned == True and returned == False:
+            runner(code,programminglanguage,CAROCO,PRDF,Parallelrun,showrunmessage,showmessageshowingwarnings,returned) # type: ignore
 def parallelrunfilesgen(filename:str,fileformat:str):
     try:
         f = open(f'{filename}_PRDF{fileformat}','x')
