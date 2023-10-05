@@ -5,6 +5,7 @@ import HAPFL
 import CAPFL
 import KTAPFL
 import BAPFL
+import DAPFL
 import AFM
 import time
 import os
@@ -19,20 +20,19 @@ token_message4 = ''
 programminglanguagefileformat = '.py'
 func_mapping_var = {}
 func_mapping_var2 = {}
-options_Reader = open('options.txt', 'r')
-options = options_Reader.read()
-options_Reader.close()
+with open('options.txt', 'r') as options_Reader:
+    options = options_Reader.read()
 def normal_function_mapping(code:str,function_mapping_variable:dict):
+    # sourcery skip: missing-dict-items
     lines2 = code.strip().split("\n")
     for s in range(len(lines2)):
         for short, full in function_mapping_variable:
             lines2[s] = lines2[s].replace(short, full)
-    codew = "\n".join(lines2)
-    return codew
+    return "\n".join(lines2)
 def find_between(filepath,first_word, second_word, occurrence):
-    file = open(filepath, 'r')
-    lines = file.readlines()
-    file.close()
+    with open(filepath, 'r') as file:
+        lines = file.readlines()
+        file.close()
     first_line_number = None
     second_line_number = None
     count = 0
@@ -111,12 +111,10 @@ def find_between3(text, firstword, secondword):
 
 def list_to_string(lst):
     string = ''.join(lst)
-    string = string.replace('\\n', '\n')
-    return string
+    return string.replace('\\n', '\n')
 def list_to_string2(lst):
     string = '\n'.join(lst)
-    string = string.replace('\\n', '\n')
-    return string
+    return string.replace('\\n', '\n')
 def compile(mode:str,file_path:str,thecode:str,programminglanguage:str):
     command2 = ''
     options_Reader = open('options.txt', 'r')
@@ -171,10 +169,13 @@ def compile(mode:str,file_path:str,thecode:str,programminglanguage:str):
     if programminglanguage == 'html':
         func_mapping_var = HAPFL.func_mapping.items()
         func_mapping_var2 = HAPFL.func_mapping.keys()
+    if programminglanguage == 'data':
+        func_mapping_var = DAPFL.func_mapping.items()
+        func_mapping_var2 = DAPFL.func_mapping.keys()
     else:
         func_mapping_var = PAPFL.func_mapping.items()
         func_mapping_var2 = PAPFL.func_mapping.keys()
-    if programminglanguage != 'python' and programminglanguage != 'C' and programminglanguage != 'c' and programminglanguage != 'java' and programminglanguage != 'javascript' and programminglanguage != 'JS' and programminglanguage != 'batch' and programminglanguage != 'kotlin' and programminglanguage != 'html':
+    if programminglanguage != 'python' and programminglanguage != 'C' and programminglanguage != 'c' and programminglanguage != 'java' and programminglanguage != 'javascript' and programminglanguage != 'JS' and programminglanguage != 'batch' and programminglanguage != 'kotlin' and programminglanguage != 'html' and programminglanguage != 'data':
         print("unknown programming language")
         exit()
     lines = code.strip().split("\n")
@@ -241,6 +242,15 @@ def compile(mode:str,file_path:str,thecode:str,programminglanguage:str):
 /function>%'''
         em_function_shape2 = f'''%<
 /function>%'''
+        if programminglanguage == 'data':
+            prt = AFM.parser.parse(data)
+            prt2 = AFM.parser.parse(goto)
+            prt3 = AFM.parser.parse(data_2)
+            prt4 = AFM.parser.parse(goto2)
+            prt5 = normal_function_mapping(data_3, func_mapping_var)# type: ignore
+            prt6 = normal_function_mapping(goto3, func_mapping_var)# type: ignore
+            prt7 = normal_function_mapping(data_4, func_mapping_var)# type: ignore
+            prt8 = normal_function_mapping(goto4, func_mapping_var)# type: ignore
         if programminglanguage == 'python':
             prt = f'print("{AFM.parser.parse(data)}")'
             prt2 = f'print("{AFM.parser.parse(goto)}")'
@@ -332,7 +342,7 @@ def compile(mode:str,file_path:str,thecode:str,programminglanguage:str):
             token_message2 = '//empty tokened function %'
             token_message3 = '//empty function $'
             token_message4 = '//empty function %'
-        if programminglanguage != 'python' and programminglanguage != 'C' and programminglanguage != 'c' and programminglanguage != 'java' and programminglanguage != 'javascript' and programminglanguage != 'JS' and programminglanguage != 'batch' and programminglanguage != 'kotlin' and programminglanguage != 'html':
+        if programminglanguage != 'python' and programminglanguage != 'C' and programminglanguage != 'c' and programminglanguage != 'java' and programminglanguage != 'javascript' and programminglanguage != 'JS' and programminglanguage != 'batch' and programminglanguage != 'kotlin' and programminglanguage != 'html' and programminglanguage != 'data':
             print("unknown programming language")
             exit()
         if data != '' and data != '\n' and data != '\t':
@@ -410,8 +420,15 @@ def compile(mode:str,file_path:str,thecode:str,programminglanguage:str):
         fin_lines3 = codes4.strip().split("\n")
         codee2 = "\n".join(fin_lines3)
         return codee2
-def runner(code:str,programminglanguage:str,CAROCO:int,PRDF:str='',parallelrun:bool=False,showrunmessage:bool=True,showmessageshowingwarnings:bool=False,returned:bool=False):
+def runner(code:str,programminglanguage:str,CAROCO:int,PRDF:str='',parallelrun:bool=False,showrunmessage:bool=True,showmessageshowingwarnings:bool=False,returned:bool=False,datalogfilename:str=''):
     global programminglanguagefileformat,command,command2
+    if programminglanguage == 'data':
+        iD = open(datalogfilename,'w')
+        iD.write('')
+        iD.close()
+        DLA = open(datalogfilename,'w')
+        DLA.write(code)
+        DLA.close()
     if programminglanguage == 'python':
         if parallelrun == True:
             command2 = f'python {PRDF}'
@@ -420,11 +437,12 @@ def runner(code:str,programminglanguage:str,CAROCO:int,PRDF:str='',parallelrun:b
         programminglanguagefileformat = '.c'
         if CAROCO == 1:
             command = "gcc runned_code.c & a.exe"
-            if parallelrun == True:
-                command2 = f'gcc {PRDF} & a.exe'
         if CAROCO == 2:
-            if parallelrun == True:
-                command = "gcc runned_code.c"
+            command = "gcc runned_code.c"
+        if CAROCO == 1 and parallelrun == True:
+            command2 = f'gcc {PRDF} & a.exe'
+        if CAROCO == 2 and parallelrun == True:
+            command2 = "gcc runned_code.c"
         if CAROCO != 1 and CAROCO != 2:
             print('the value of CAROCO perimeter it is out of range or is not a integer value')
             exit()
@@ -456,7 +474,7 @@ def runner(code:str,programminglanguage:str,CAROCO:int,PRDF:str='',parallelrun:b
                 data = PRDF
                 data1 = data
                 data2 = data1[0].upper() + data1[1:]
-                data3 = data2[:-3] + data2[-2].upper()
+                data3 = data2[:-3] + data2[-2].upper() + data2[-1].upper()
                 command2 = f"kotlinc {data1} & kotlin {data3}.class"
                 print(command2)
         if CAROCO == 2:
@@ -466,36 +484,37 @@ def runner(code:str,programminglanguage:str,CAROCO:int,PRDF:str='',parallelrun:b
         if CAROCO != 1 and CAROCO != 2:
             print('the value of CAROCO perimeter it is out of range or is not a integer value')
             exit()
-    with open(f"runned_code{programminglanguagefileformat}", "w") as file:
-        file.write(f'{code}')
-    if parallelrun == True:
-        with open(f"{PRDF}", "w") as file2:
-            file2.write('')
-        with open(f"{PRDF}", "w") as file:
+    if programminglanguage != 'data':
+        with open(f"runned_code{programminglanguagefileformat}", "w") as file:
             file.write(f'{code}')
-        os.system(f'start cmd /k {command2}')
-    else:
-        subprocess.Popen(command, shell=True).wait()
+        if parallelrun == True:
+            with open(f"{PRDF}", "w") as file2:
+                file2.write('')
+            with open(f"{PRDF}", "w") as file:
+                file.write(f'{code}')
+            os.system(f'start cmd /k {command2}')
+        else:
+            subprocess.Popen(command, shell=True).wait()
 
-    y = int(time.strftime('%Y%d%d%H%M%S'))
+        y = int(time.strftime('%Y%d%d%H%M%S'))
 
-    end_time = time.time()
-    time_diff = end_time - start_time
-    if parallelrun == True and showrunmessage == True:
-        os.system(f"echo the {PRDF} file running by using parallel run🔥")
-    if parallelrun == False and showrunmessage == True:
-        print('note:running more than normal run like the all run_pre or else make the compiler')
-        print('shows the run time is add to the run time before it')
-        print(f"{programminglanguage.upper()} Finished in {time_diff:.3f} seconds")
-    if showmessageshowingwarnings == True and parallelrun == True and showrunmessage == True:
-        print('if the terminal or any another way to show the run message and you run the code')
-        print('by using parallel run you could found |?|')
-        print('this is because your terminal cannot show emojis (flame emoji)')
-    if returned == True:
-        fooe = open("run_system_functions_AOC.txt", 'w')
-        fooe.write(code)
+        end_time = time.time()
+        time_diff = end_time - start_time
+        if parallelrun == True and showrunmessage == True:
+            os.system(f"echo the {PRDF} file running by using parallel run🔥")
+        if parallelrun == False and showrunmessage == True:
+            print('note:running more than normal run like the all run_pre or else make the compiler')
+            print('shows the run time is add to the run time before it')
+            print(f"{programminglanguage.upper()} Finished in {time_diff:.3f} seconds")
+        if showmessageshowingwarnings == True and parallelrun == True and showrunmessage == True:
+            print('if the terminal or any another way to show the run message and you run the code')
+            print('by using parallel run you could found |?|')
+            print('this is because your terminal cannot show emojis (flame emoji)')
+        if returned == True:
+            fooe = open("run_system_functions_AOC.txt", 'w')
+            fooe.write(code)
 SET_NO_STATEMENT_FUNCTION_CALLING = list_to_string(find_between2(options, '$<set no statement function calling>','/set no statement function calling>$', 1))
-def run(programminglanguage:str, CAROCO:int, runned:bool, returned:bool, file_path:str='', thecode:str='', PRDF:str='', Parallelrun:bool=False, showrunmessage:bool=True, showmessageshowingwarnings:bool=False):
+def run(programminglanguage:str,CAROCO:int, runned:bool, returned:bool, file_path:str='', thecode:str='', PRDF:str='', Parallelrun:bool=False, showrunmessage:bool=True, showmessageshowingwarnings:bool=False,datalogfilename:str=''):
     func_mapping_var = {}
     fl = open('run_system_functions_AOC.txt','w')
     fl.write('')
@@ -514,7 +533,7 @@ def run(programminglanguage:str, CAROCO:int, runned:bool, returned:bool, file_pa
         func_mapping_var = KTAPFL.func_mapping.keys()
     if programminglanguage == 'html':
         func_mapping_var = HAPFL.func_mapping.keys()
-    if programminglanguage != 'python' and programminglanguage != 'C' and programminglanguage != 'c'and programminglanguage != 'java' and programminglanguage != 'javascript' and programminglanguage != 'JS' and programminglanguage != 'batch' and programminglanguage != 'kotlin' and programminglanguage != 'html':
+    if programminglanguage != 'python' and programminglanguage != 'C' and programminglanguage != 'c'and programminglanguage != 'java' and programminglanguage != 'javascript' and programminglanguage != 'JS' and programminglanguage != 'batch' and programminglanguage != 'kotlin' and programminglanguage != 'html' and programminglanguage != 'data':
         print("unknown programming language")
         exit()
     if file_path != '':
@@ -522,8 +541,7 @@ def run(programminglanguage:str, CAROCO:int, runned:bool, returned:bool, file_pa
             with open(file_path, 'r') as f:
                 code1 = f.read()
                 for i in range(100000):
-                    if programminglanguage != 'all':
-                        if f'<{programminglanguage} part s>{i + 1}' in code1:
+                    if programminglanguage != 'all' and f'<{programminglanguage} part s>{i + 1}' in code1:
                             code2 = list_to_string2(find_between2_2(code1,f'<{programminglanguage} part s>{i + 1}', f'<{programminglanguage} part e>{i + 1}', 1))
                             py = open('run_system_functions_AOC.txt', 'a')
                             print(code2, file=py)
@@ -537,10 +555,10 @@ def run(programminglanguage:str, CAROCO:int, runned:bool, returned:bool, file_pa
                 if returned == True and runned == False:
                     return code
                 if runned == True and returned == True:
-                    runner(code,programminglanguage,CAROCO,PRDF,Parallelrun,showrunmessage,showmessageshowingwarnings,returned) # type: ignore
+                    runner(code,programminglanguage,CAROCO,PRDF,Parallelrun,showrunmessage,showmessageshowingwarnings,returned,datalogfilename) # type: ignore
                     return code
                 if runned == True and returned == False:
-                    runner(code,programminglanguage,CAROCO,PRDF,Parallelrun,showrunmessage,showmessageshowingwarnings,returned) # type: ignore
+                    runner(code,programminglanguage,CAROCO,PRDF,Parallelrun,showrunmessage,showmessageshowingwarnings,returned,datalogfilename) # type: ignore
         else:
             print(f"The file '{file_path}' does not exist")
     else:
@@ -559,10 +577,10 @@ def run(programminglanguage:str, CAROCO:int, runned:bool, returned:bool, file_pa
         if returned == True and runned == False:
             return code
         if runned == True and returned == True:
-            runner(code,programminglanguage,CAROCO,PRDF,Parallelrun,showrunmessage,showmessageshowingwarnings,returned) # type: ignore
+            runner(code,programminglanguage,CAROCO,PRDF,Parallelrun,showrunmessage,showmessageshowingwarnings,returned,datalogfilename) # type: ignore
             return code
         if runned == True and returned == False:
-            runner(code,programminglanguage,CAROCO,PRDF,Parallelrun,showrunmessage,showmessageshowingwarnings,returned) # type: ignore
+            runner(code,programminglanguage,CAROCO,PRDF,Parallelrun,showrunmessage,showmessageshowingwarnings,returned,datalogfilename) # type: ignore
 def parallelrunfilesgen(filename:str,fileformat:str):
     try:
         f = open(f'{filename}_PRDF{fileformat}','x')
