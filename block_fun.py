@@ -168,3 +168,4 @@ class blockfunctions():
             if blockinfo[0] == 'batch':
                 run_system_functions.run('batch', someinfo[0], someinfo[1], someinfo[2], f'{datatransferfile}{datatransferfileformat}','', someinfo[3], someinfo[4],someinfo[5], someinfo[6])
             self.datatorun.close()
+blockclass = blockfunctions()
