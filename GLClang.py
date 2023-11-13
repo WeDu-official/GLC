@@ -67,7 +67,7 @@ def clear2():
     with open('lacodeasavea.txt', 'w') as la2:
         la2.write('')
     la2.close()
-def run_pre(filename:str,CAROCO:int,run_type:bool,programminglanguage:str,datalogfilename:str=''):
+def run_pre(filename:str,CAROCO:int,programminglanguage:str,datalogfilename:str=''):
     run(programminglanguage,CAROCO,True,False,filename,'','',False,True,False,datalogfilename)
 def allrun_pre(filename:str,CAROCO=None,run_type=None,runorder=None,datalogfilename:str=''):
     if runorder is None: runorder = []
@@ -82,7 +82,7 @@ def allparallelrun_pre(filename:str,CAROCO=None,run_type=None,PRDF=None,runorder
     if PRDF is None: PRDF = []
     for i in range(len(runorder)):
         run(runorder[i],CAROCO[i],run_type[i],False,filename,'',PRDF[i],True,True,False,datalogfilename=datalogfilename)
-def run_precode(code:str,CAROCO:int,run_type:bool,programminglanguage:str,datalogfilename:str=''):
+def run_precode(code:str,CAROCO:int,programminglanguage:str,datalogfilename:str=''):
     run(programminglanguage,CAROCO,True,False,'',code,'',False,True,False,datalogfilename=datalogfilename)
 def allrun_precode(code:str,datalogfilename:str='',CAROCO=None,run_type=None,runorder=None):
     if runorder is None: runorder = []
