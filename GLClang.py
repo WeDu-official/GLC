@@ -1,11 +1,11 @@
 from run_system_functions import *
 #create functions
 def writedata_pre(readenfile, writeenfile):
-    """this function reads writeenfile and writes the data of the writeenfile
-    in readenfile(this function copy the data in writeenfile and paste it in readenfile)."""
-    with open(f'{writeenfile}', 'r') as la2:
+    """this function reads readenfile and writes the data of the readenfile
+    in writenfile(this function copy the data in readenfile and paste it in writeenfile)."""
+    with open(f'{readenfile}', 'r') as la2:
         x = la2.read()
-    with open(f'{readenfile}', 'w') as la:
+    with open(f'{writeenfile}', 'w') as la:
         la.write(f'{x}')
     la.close()
     la2.close()
@@ -68,79 +68,71 @@ def clear2():
         la2.write('')
     la2.close()
 def run_pre(filename:str,CAROCO:int,programminglanguage:str,datalogfilename:str=''):
-    run(programminglanguage,CAROCO,True,False,filename,'','',False,True,False,datalogfilename)
-def allrun_pre(filename:str,CAROCO=None,run_type=None,runorder=None,datalogfilename:str=''):
+    run(programminglanguage,CAROCO,False,filename,'','',False,True,False,datalogfilename)
+def allrun_pre(filename:str,CAROCO=None,runorder=None,datalogfilename:str=''):
     if runorder is None: runorder = []
     if CAROCO is None: CAROCO = []
-    if run_type is None: run_type = []
     for i in range(len(runorder)):
-        run(runorder[i],CAROCO[i],run_type[i],False,filename,'',datalogfilename=datalogfilename)
-def allparallelrun_pre(filename:str,CAROCO=None,run_type=None,PRDF=None,runorder=None,datalogfilename:str=''):
+        run(runorder[i],CAROCO[i],False,filename,'',datalogfilename=datalogfilename)
+def allparallelrun_pre(filename:str,CAROCO=None,PRDF=None,runorder=None,datalogfilename:str=''):
     if runorder is None: runorder = []
     if CAROCO is None: CAROCO = []
-    if run_type is None: run_type = []
     if PRDF is None: PRDF = []
     for i in range(len(runorder)):
-        run(runorder[i],CAROCO[i],run_type[i],False,filename,'',PRDF[i],True,True,False,datalogfilename=datalogfilename)
+        run(runorder[i],CAROCO[i],False,filename,'',PRDF[i],True,True,False,datalogfilename=datalogfilename)
 def run_precode(code:str,CAROCO:int,programminglanguage:str,datalogfilename:str=''):
-    run(programminglanguage,CAROCO,True,False,'',code,'',False,True,False,datalogfilename=datalogfilename)
-def allrun_precode(code:str,datalogfilename:str='',CAROCO=None,run_type=None,runorder=None):
+    run(programminglanguage,CAROCO,False,'',code,'',False,True,False,datalogfilename=datalogfilename)
+def allrun_precode(code:str,datalogfilename:str='',CAROCO=None,runorder=None):
     if runorder is None: runorder = []
     if CAROCO is None: CAROCO = []
-    if run_type is None: run_type = []
     for i in range(len(runorder)):
-        run(runorder[i],CAROCO[i],run_type[i],False,'',code,datalogfilename=datalogfilename)
-def allparallelrun_precode(code:str,CAROCO=None,run_type=None,PRDF=None,runorder=None,datalogfilename:str=''):
+        run(runorder[i],CAROCO[i],False,'',code,datalogfilename=datalogfilename)
+def allparallelrun_precode(code:str,CAROCO=None,PRDF=None,runorder=None,datalogfilename:str=''):
     if runorder is None: runorder = []
     if CAROCO is None: CAROCO = []
-    if run_type is None: run_type = []
     if PRDF is None: PRDF = []
     for i in range(len(runorder)):
-        run(runorder[i],CAROCO[i],run_type[i],False,'',code,PRDF[i],True,True,False,datalogfilename=datalogfilename)
-def run_precos(programminglanguage:str,filename:str,run_type:bool,CAROCO:int,returned:bool,showrunmessage:bool,showmessageswithwarnings:bool,datalogfilename:str=''):
-    run(programminglanguage,CAROCO,run_type,returned,filename,'','',False,showrunmessage,showmessageswithwarnings,datalogfilename=datalogfilename)
-def allrun_precos(filename:str,CAROCO=None,run_type=None,returned=None,showrunmessage=None,showmessageswithwarnings=None,runorder=None,datalogfilename:str=''):
+        run(runorder[i],CAROCO[i],False,'',code,PRDF[i],True,True,False,datalogfilename=datalogfilename)
+def run_precos(programminglanguage:str,filename:str,CAROCO:int,returned:bool,showrunmessage:bool,showmessageswithwarnings:bool,datalogfilename:str=''):
+    run(programminglanguage,CAROCO,returned,filename,'','',False,showrunmessage,showmessageswithwarnings,datalogfilename=datalogfilename)
+def allrun_precos(filename:str,CAROCO=None,returned=None,showrunmessage=None,showmessageswithwarnings=None,runorder=None,datalogfilename:str=''):
     if runorder is None: runorder = []
     if CAROCO is None: CAROCO = []
-    if run_type is None: run_type = []
     if returned is None: returned = []
     if showrunmessage is None: showrunmessage = []
     if showmessageswithwarnings is None: showmessageswithwarnings = []
     for i in range(len(runorder)):
-        run(runorder[i],CAROCO[i],run_type[i],returned[i],filename,'','',False,showrunmessage[i],showmessageswithwarnings[i],datalogfilename=datalogfilename)
-def allparallelrun_precos(filename:str,datalogfilename:str='',CAROCO=None,run_type=None,returned=None,showrunmessage=None,showmessageswithwarnings=None,PRDF=None,runorder=None):
+        run(runorder[i],CAROCO[i],returned[i],filename,'','',False,showrunmessage[i],showmessageswithwarnings[i],datalogfilename=datalogfilename)
+def allparallelrun_precos(filename:str,datalogfilename:str='',CAROCO=None,returned=None,showrunmessage=None,showmessageswithwarnings=None,PRDF=None,runorder=None):
     if runorder is None: runorder = []
     if CAROCO is None: CAROCO = []
-    if run_type is None: run_type = []
     if returned is None: returned = []
     if showrunmessage is None: showrunmessage = []
     if showmessageswithwarnings is None: showmessageswithwarnings = []
     if PRDF is None: PRDF = []
     for i in range(len(runorder)):
-        run(runorder[i],CAROCO[i],run_type[i],returned[i],filename,'',PRDF[i],True,showrunmessage[i],showmessageswithwarnings[i],datalogfilename=datalogfilename)
-def run_precodecos(programminglanguage:str,code:str,run_type:bool,CAROCO:int,returned:bool,showrunmessage:bool,showmessageswithwarnings:bool,datalogfilename:str=''):
-    run(programminglanguage,CAROCO,run_type,returned,'',code,'',False,showrunmessage,showmessageswithwarnings,datalogfilename=datalogfilename)
-def allrun_precodecos(code:str,CAROCO=None,run_type=None,returned=None,showrunmessage=None,showmessageswithwarnings=None,runorder=None,datalogfilename:str=''):
+        run(runorder[i],CAROCO[i],returned[i],filename,'',PRDF[i],True,showrunmessage[i],showmessageswithwarnings[i],datalogfilename=datalogfilename)
+def run_precodecos(programminglanguage:str,code:str,CAROCO:int,returned:bool,showrunmessage:bool,showmessageswithwarnings:bool,datalogfilename:str=''):
+    run(programminglanguage,CAROCO,returned,'',code,'',False,showrunmessage,showmessageswithwarnings,datalogfilename=datalogfilename)
+def allrun_precodecos(code:str,CAROCO=None,returned=None,showrunmessage=None,showmessageswithwarnings=None,runorder=None,datalogfilename:str=''):
     if runorder is None: runorder = []
     if CAROCO is None: CAROCO = []
-    if run_type is None: run_type = []
     if returned is None: returned = []
     if showrunmessage is None: showrunmessage = []
     if showmessageswithwarnings is None: showmessageswithwarnings = []
     for i in range(len(runorder)):
-        run(runorder[i],CAROCO[i],run_type[i],returned[i],'',code,'',False,showrunmessage[i],showmessageswithwarnings[i],datalogfilename=datalogfilename)
-def allparallelrun_precodecos(code:str,CAROCO=None,run_type=None,returned=None,showrunmessage=None,showmessageswithwarnings=None,PRDF=None,runorder=None,datalogfilename:str=''):
+        run(runorder[i],CAROCO[i],returned[i],'',code,'',False,showrunmessage[i],showmessageswithwarnings[i],datalogfilename=datalogfilename)
+def allparallelrun_precodecos(code:str,CAROCO=None,returned=None,showrunmessage=None,showmessageswithwarnings=None,PRDF=None,runorder=None,datalogfilename:str=''):
     if runorder is None: runorder = []
     if CAROCO is None: CAROCO = []
-    if run_type is None: run_type = []
     if returned is None: returned = []
     if showrunmessage is None: showrunmessage = []
     if showmessageswithwarnings is None: showmessageswithwarnings = []
     if PRDF is None: PRDF = []
     for i in range(len(runorder)):
-        run(runorder[i],CAROCO[i],run_type[i],returned[i],'',code,PRDF[i],True,showrunmessage[i],showmessageswithwarnings[i],datalogfilename=datalogfilename)
-def parallelrun(programminglanguage:str,CAROCO:int,runned:bool,returned:bool,file_path:str='',code:str='',PRDF:str='',Parallelrun:bool=False,showrunmessage:bool=True,showmessageshowingwarnings:bool=False,datalogfilename:str=''):
-    run(programminglanguage,CAROCO,runned,returned,file_path,code,PRDF,Parallelrun,showrunmessage,showmessageshowingwarnings,datalogfilename=datalogfilename)
+        run(runorder[i],CAROCO[i],returned[i],'',code,PRDF[i],True,showrunmessage[i],showmessageswithwarnings[i],datalogfilename=datalogfilename)
+def parallelrun(programminglanguage:str,CAROCO:int,returned:bool,file_path:str='',code:str='',PRDF:str='',Parallelrun:bool=False,showrunmessage:bool=True,showmessageshowingwarnings:bool=False,datalogfilename:str=''):
+    run(programminglanguage,CAROCO,returned,file_path,code,PRDF,Parallelrun,showrunmessage,showmessageshowingwarnings,datalogfilename=datalogfilename)
 def parallelrunfilesgenrator(filename:str,fileformat:str):
     parallelrunfilesgen(filename,fileformat)
 def GLC_filegenrator(file_name_without_file_format:str,Python_PRDF:bool=False,C_PRDF:bool=False,Java_PRDF:bool=False,JS_PRDF:bool=False,HTML_PRDF:bool=False,Batch_PRDF:bool=False,Kotlin_PRDF:bool=False):
@@ -154,7 +146,7 @@ def restart():
 def restart_pre(filename):
     """this function restarts filename that is .gcf or .PLFF"""
     with open(f'{filename}', 'w') as oldb:
-        oldb.write('')
+        oldb.write('') 
 def run_code(filename):
     """this function runs code like python files and C files and all other programming
     languages supported by GLC
@@ -194,20 +186,3 @@ def run_code(filename):
         os.system(f"node {data}")
     if '.html' in data:
         os.system(f"{data}")
-#basic run function that uses 5 another functions
-def allbasicrun_pre(runorder:str,readenfile:str,writeenfile:str,runtype:bool,CAROCO:int,datalogfilename:str=''):
-    """this function uses writedata and runmain,restart,readdata,clear2 functions to do run for
-    main.gcf or main.PLFF without problems"""
-    writedata_pre(readenfile, writeenfile)
-    allrun_pre(writeenfile,datalogfilename,CAROCO,runtype,runorder)
-    restart_pre(writeenfile)
-    readdata_pre(readenfile, writeenfile)
-    clear_pre(readenfile)
-def basicrun_pre(programminglanguage:str,readenfile:str,writeenfile:str,runtype:bool,CAROCO:int,datalogfilename:str=''):
-    """this function uses writedata_pre and run_pre,restart_pre,readdata_pre,clear_pre functions to do run for
-    filename that is .gcf or .PLFF without problems"""
-    writedata_pre(readenfile, writeenfile)
-    run_pre(writeenfile,CAROCO,runtype,programminglanguage,datalogfilename)
-    restart_pre(writeenfile)
-    readdata_pre(readenfile, writeenfile)
-    clear_pre(readenfile)

@@ -514,8 +514,14 @@ def runner(code:str,programminglanguage:str,CAROCO:int,PRDF:str='',parallelrun:b
             fooe = open("run_system_functions_AOC.txt", 'w')
             fooe.write(code)
 SET_NO_STATEMENT_FUNCTION_CALLING = list_to_string(find_between2(options, '$<set no statement function calling>','/set no statement function calling>$', 1))
-def run(programminglanguage:str,CAROCO:int, runned:bool, returned:bool, file_path:str='', thecode:str='', PRDF:str='', Parallelrun:bool=False, showrunmessage:bool=True, showmessageshowingwarnings:bool=False,datalogfilename:str=''):
+def run(programminglanguage:str,CAROCO:int, returned:bool, file_path:str='', thecode:str='', PRDF:str='', Parallelrun:bool=False, showrunmessage:bool=True, showmessageshowingwarnings:bool=False,datalogfilename:str=''):
     func_mapping_var = {}
+    if CAROCO == 1:
+        runned = True
+    if CAROCO == 2:
+        runned = False
+    if CAROCO != 1 and CAROCO != 2:
+        print('the "CAROCO" parameter has an invalid value')
     fl = open('run_system_functions_AOC.txt','w')
     fl.write('')
     fl.close()

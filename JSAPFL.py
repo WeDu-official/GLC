@@ -6,7 +6,5 @@ func_mapping = {
 '/tokened>$':'/tokened>$',
 '%<':'%<',
 '/tokened>%':'/tokened>%',
-'$<start>':'$<start>',
-'$<end>':'$<end>',
 '~1':''
 }
