@@ -69,70 +69,88 @@ def clear2():
     la2.close()
 def run_pre(filename:str,CAROCO:int,programminglanguage:str,datalogfilename:str=''):
     run(programminglanguage,CAROCO,False,filename,'','',False,True,False,datalogfilename)
-def allrun_pre(filename:str,CAROCO=None,runorder=None,datalogfilename:str=''):
+def allrun_pre(filename=None,CAROCO=None,runorder=None,datalogfilename=None):
     if runorder is None: runorder = []
     if CAROCO is None: CAROCO = []
+    if filename is None: filename = []
+    if datalogfilename is None: datalogfilename = []
     for i in range(len(runorder)):
-        run(runorder[i],CAROCO[i],False,filename,'',datalogfilename=datalogfilename)
-def allparallelrun_pre(filename:str,CAROCO=None,PRDF=None,runorder=None,datalogfilename:str=''):
+        run(runorder[i],CAROCO[i],False,filename[i],'',datalogfilename=datalogfilename[i])
+def allparallelrun_pre(filename=None,CAROCO=None,PRDF=None,runorder=None,datalogfilename=None):
     if runorder is None: runorder = []
     if CAROCO is None: CAROCO = []
     if PRDF is None: PRDF = []
+    if filename is None: filename = []
+    if datalogfilename is None: datalogfilename = []
     for i in range(len(runorder)):
-        run(runorder[i],CAROCO[i],False,filename,'',PRDF[i],True,True,False,datalogfilename=datalogfilename)
+        run(runorder[i],CAROCO[i],False,filename[i],'',PRDF[i],True,True,False,datalogfilename=datalogfilename[i])
 def run_precode(code:str,CAROCO:int,programminglanguage:str,datalogfilename:str=''):
     run(programminglanguage,CAROCO,False,'',code,'',False,True,False,datalogfilename=datalogfilename)
-def allrun_precode(code:str,datalogfilename:str='',CAROCO=None,runorder=None):
+def allrun_precode(code=None,datalogfilename=None,CAROCO=None,runorder=None):
     if runorder is None: runorder = []
     if CAROCO is None: CAROCO = []
+    if code is None: code = []
+    if datalogfilename is None: datalogfilename = []
     for i in range(len(runorder)):
-        run(runorder[i],CAROCO[i],False,'',code,datalogfilename=datalogfilename)
-def allparallelrun_precode(code:str,CAROCO=None,PRDF=None,runorder=None,datalogfilename:str=''):
+        run(runorder[i],CAROCO[i],False,'',code[i],datalogfilename=datalogfilename[i])
+def allparallelrun_precode(code=None,CAROCO=None,PRDF=None,runorder=None,datalogfilename=None):
     if runorder is None: runorder = []
     if CAROCO is None: CAROCO = []
     if PRDF is None: PRDF = []
+    if code is None: code = []
+    if datalogfilename is None: datalogfilename = []
     for i in range(len(runorder)):
-        run(runorder[i],CAROCO[i],False,'',code,PRDF[i],True,True,False,datalogfilename=datalogfilename)
+        run(runorder[i],CAROCO[i],False,'',code[i],PRDF[i],True,True,False,datalogfilename=datalogfilename[i])
 def run_precos(programminglanguage:str,filename:str,CAROCO:int,returned:bool,showrunmessage:bool,showmessageswithwarnings:bool,datalogfilename:str=''):
     run(programminglanguage,CAROCO,returned,filename,'','',False,showrunmessage,showmessageswithwarnings,datalogfilename=datalogfilename)
-def allrun_precos(filename:str,CAROCO=None,returned=None,showrunmessage=None,showmessageswithwarnings=None,runorder=None,datalogfilename:str=''):
+def allrun_precos(filename=None,CAROCO=None,returned=None,showrunmessage=None,showmessageswithwarnings=None,runorder=None,datalogfilename=None):
     if runorder is None: runorder = []
     if CAROCO is None: CAROCO = []
     if returned is None: returned = []
     if showrunmessage is None: showrunmessage = []
     if showmessageswithwarnings is None: showmessageswithwarnings = []
+    if filename is None: filename = []
+    if datalogfilename is None: datalogfilename = []
     for i in range(len(runorder)):
-        run(runorder[i],CAROCO[i],returned[i],filename,'','',False,showrunmessage[i],showmessageswithwarnings[i],datalogfilename=datalogfilename)
-def allparallelrun_precos(filename:str,datalogfilename:str='',CAROCO=None,returned=None,showrunmessage=None,showmessageswithwarnings=None,PRDF=None,runorder=None):
+        run(runorder[i],CAROCO[i],returned[i],filename[i],'','',False,showrunmessage[i],showmessageswithwarnings[i],datalogfilename=datalogfilename[i])
+def allparallelrun_precos(filename=None,datalogfilename=None,CAROCO=None,returned=None,showrunmessage=None,showmessageswithwarnings=None,PRDF=None,runorder=None):
     if runorder is None: runorder = []
     if CAROCO is None: CAROCO = []
     if returned is None: returned = []
     if showrunmessage is None: showrunmessage = []
     if showmessageswithwarnings is None: showmessageswithwarnings = []
     if PRDF is None: PRDF = []
+    if filename is None: filename = []
+    if datalogfilename is None: datalogfilename = []
     for i in range(len(runorder)):
-        run(runorder[i],CAROCO[i],returned[i],filename,'',PRDF[i],True,showrunmessage[i],showmessageswithwarnings[i],datalogfilename=datalogfilename)
+        run(runorder[i],CAROCO[i],returned[i],filename[i],'',PRDF[i],True,showrunmessage[i],showmessageswithwarnings[i],datalogfilename=datalogfilename[i])
 def run_precodecos(programminglanguage:str,code:str,CAROCO:int,returned:bool,showrunmessage:bool,showmessageswithwarnings:bool,datalogfilename:str=''):
     run(programminglanguage,CAROCO,returned,'',code,'',False,showrunmessage,showmessageswithwarnings,datalogfilename=datalogfilename)
-def allrun_precodecos(code:str,CAROCO=None,returned=None,showrunmessage=None,showmessageswithwarnings=None,runorder=None,datalogfilename:str=''):
+def allrun_precodecos(code=None,CAROCO=None,returned=None,showrunmessage=None,showmessageswithwarnings=None,runorder=None,datalogfilename=None):
     if runorder is None: runorder = []
     if CAROCO is None: CAROCO = []
     if returned is None: returned = []
     if showrunmessage is None: showrunmessage = []
     if showmessageswithwarnings is None: showmessageswithwarnings = []
+    if code is None: code = []
+    if datalogfilename is None: datalogfilename = []
     for i in range(len(runorder)):
-        run(runorder[i],CAROCO[i],returned[i],'',code,'',False,showrunmessage[i],showmessageswithwarnings[i],datalogfilename=datalogfilename)
-def allparallelrun_precodecos(code:str,CAROCO=None,returned=None,showrunmessage=None,showmessageswithwarnings=None,PRDF=None,runorder=None,datalogfilename:str=''):
+        run(runorder[i],CAROCO[i],returned[i],'',code[i],'',False,showrunmessage[i],showmessageswithwarnings[i],datalogfilename=datalogfilename[i])
+def allparallelrun_precodecos(code=None,CAROCO=None,returned=None,showrunmessage=None,showmessageswithwarnings=None,PRDF=None,runorder=None,datalogfilename=None):
     if runorder is None: runorder = []
     if CAROCO is None: CAROCO = []
     if returned is None: returned = []
     if showrunmessage is None: showrunmessage = []
     if showmessageswithwarnings is None: showmessageswithwarnings = []
     if PRDF is None: PRDF = []
+    if code is None: code = []
+    if datalogfilename is None: datalogfilename = []
     for i in range(len(runorder)):
-        run(runorder[i],CAROCO[i],returned[i],'',code,PRDF[i],True,showrunmessage[i],showmessageswithwarnings[i],datalogfilename=datalogfilename)
-def parallelrun(programminglanguage:str,CAROCO:int,returned:bool,file_path:str='',code:str='',PRDF:str='',Parallelrun:bool=False,showrunmessage:bool=True,showmessageshowingwarnings:bool=False,datalogfilename:str=''):
-    run(programminglanguage,CAROCO,returned,file_path,code,PRDF,Parallelrun,showrunmessage,showmessageshowingwarnings,datalogfilename=datalogfilename)
+        run(runorder[i],CAROCO[i],returned[i],'',code[i],PRDF[i],True,showrunmessage[i],showmessageswithwarnings[i],datalogfilename=datalogfilename[i])
+def parallelrun(programminglanguage:str,CAROCO:int,returned:bool,file_path:str='',PRDF:str='',showrunmessage:bool=True,showmessageshowingwarnings:bool=False,datalogfilename:str=''):
+    run(programminglanguage,CAROCO,returned,file_path,'',PRDF,True,showrunmessage,showmessageshowingwarnings,datalogfilename=datalogfilename)
+def parallelruncode(programminglanguage:str,CAROCO:int,returned:bool,code:str='',PRDF:str='',showrunmessage:bool=True,showmessageshowingwarnings:bool=False,datalogfilename:str=''):
+    run(programminglanguage,CAROCO,returned,'',code,PRDF,True,showrunmessage,showmessageshowingwarnings,datalogfilename=datalogfilename)
 def parallelrunfilesgenrator(filename:str,fileformat:str):
     parallelrunfilesgen(filename,fileformat)
 def GLC_filegenrator(file_name_without_file_format:str,Python_PRDF:bool=False,C_PRDF:bool=False,Java_PRDF:bool=False,JS_PRDF:bool=False,HTML_PRDF:bool=False,Batch_PRDF:bool=False,Kotlin_PRDF:bool=False):

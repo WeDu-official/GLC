@@ -1,14 +1,14 @@
+import os
+import AFM
+import time
 import JAPFL
-import JSAPFL
 import PAPFL
 import HAPFL
 import CAPFL
-import KTAPFL
 import BAPFL
 import DAPFL
-import AFM
-import time
-import os
+import JSAPFL
+import KTAPFL
 import subprocess
 start_time = time.time()
 command2 = ''
@@ -565,6 +565,9 @@ def run(programminglanguage:str,CAROCO:int, returned:bool, file_path:str='', the
                     return code
                 if runned == True and returned == False:
                     runner(code,programminglanguage,CAROCO,PRDF,Parallelrun,showrunmessage,showmessageshowingwarnings,returned,datalogfilename) # type: ignore
+                closersfa = open('run_system_functions_AOC.txt', 'w')
+                closersfa.write('')
+                closersfa.close()    
         else:
             print(f"The file '{file_path}' does not exist")
     else:
@@ -587,6 +590,9 @@ def run(programminglanguage:str,CAROCO:int, returned:bool, file_path:str='', the
             return code
         if runned == True and returned == False:
             runner(code,programminglanguage,CAROCO,PRDF,Parallelrun,showrunmessage,showmessageshowingwarnings,returned,datalogfilename) # type: ignore
+        closersfa = open('run_system_functions_AOC.txt', 'w')
+        closersfa.write('')
+        closersfa.close()       
 def parallelrunfilesgen(filename:str,fileformat:str):
     try:
         f = open(f'{filename}_PRDF{fileformat}','x')

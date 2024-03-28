@@ -1,4 +1,56 @@
-# GLC
+## this is GLC 3 (Joy Boy)🦸‍♂️
+
+<img src="s.png">
+
+## new changes and features:
+
+
+**1-support for TurtleDB(a new programming language support)**
+
+**2-GLC now is faster and better and easier with it's triple-COLB-system program**
+
+**3-full support for code instead of only file now you can use either file or code to run and do another things like that**
+
+**4-full support for parallel run🔥(this thing will let you control the space and time)**
+
+**5-block_functions finally completed(finally you can control on code blocks)**
+
+**6-finally everything is work with it's miximum power**
+
+**7-GLC.py and convrun,shortcutfunc.py, teleport_files all of them removed from this version**
+
+**8-run_system_functions.py and GLClang.py, block_fun.py, this file(README.md),all of ...APFL.py files got an update(contains compiling anf system changes with new feature and GLClang got some new functions and changes to help you)**
+
+**9-there are some changes: in some of the parameters of some functions and in GLClang and etc... to make the commanding system better**
+
+**note:there are a lot of other changes and features but from how much I worked and spent time on it I forgot the old changes and features that I had done**
+
+### changes outside GLC but they are related to it
+
+
+**1-compiler documention.pdf deleted**
+
+
+**2-little changes in GLCprojectcreator.py**
+
+## cool notes:
+
+**all of bugs being fixed(TRUE)**
+
+**finally kotlin and C support being very good like the python ones or the batch one**
+
+
+**note:this is our plans for things that will be found in GLC 4 or little more:**
+
+
+**1-update the strike and OSL**
+
+
+**2-more changes in FTCM**
+
+**3-make the GLC IDE**
+
+## Requirements
 **NOTE:YOU MUST TO INSTALL Python programming language and ply(python**
 
 
@@ -11,8 +63,9 @@ you will have the support for python,html,batch only and there is possibility to
 
 **the Recommended reqirements are**
 
-**PYTHON with ply(python lex-yucc) and Pillow python libaries and any**
-**modern browser**
+**minimum requirements**
+
+**➕**
 
 **Node.js**
 
@@ -60,83 +113,3 @@ example for cmd command using it:
 
 
 java runned_code.java
-
-
-## this is pre beta devpack 1.3
-
-## new features:
-
-**support for TurtleDB**
-
-
-**runing multiple code blocks with normal and parallel run🔥**
-
-
-**you can run or parallel run🔥 a code instead of file**
-
-## updated features:
-
-
-**big update to running system and compiling system**
-
-
-**huge updated to GLClang with new features**
-
-
-## cool notes:
-
-**all of bugs being fixed**
-
-**finally kotlin and C support being very good like the python ones or the batch one**
-
-## all changes
-
-
-**support for TurtleDB**
-
-
-**runing multiple code blocks with normal and parallel run🔥**
-
-
-**you can run or parallel run🔥 a code instead of file**
-
-
-**big update to running system and compiling system**
-
-
-**huge updated to GLClang with new features**
-
-
-**all of bugs being fixed**
-
-
-**GLC.py and convrun, teleport_files deleted**
-
-**updated run_system_functions.py and GLClang.py, NOTE**
-
-
-### changes out side GLC but they are related to it
-
-
-**compiler documention.pdf deleted**
-
-
-**little changes in GLCprojectcreator.py**
-
-
-**but when you ask me for some thing in our website I will tell you**
-
-
-**our plans that will found in 1.3 or little more:**
-
-
-**update the documentation**
-
-
-**update the GLC commander**
-
-
-**update the strike and OSL**
-
-
-**more changes in FTCM**
