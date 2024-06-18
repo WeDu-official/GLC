@@ -2,6 +2,10 @@
 
 <img src="s.png">
 
+
+NOTE:SOON GLC 3 MAX will be released after short time after GLC 3 pro
+
+
 ## new changes and features:
 
 
