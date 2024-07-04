@@ -1,6 +1,4 @@
-## this is GLC 3 (Joy Boy)🦸‍♂️
-
-<img src="s.png">
+## this is GLC 3 (Joy Boy)
 
 
 note: soon GLC 3 MAX will be released after short time after GLC 3 pro
