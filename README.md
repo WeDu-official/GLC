@@ -1,17 +1,20 @@
-## this is GLC 3 (Joy Boy)
+## this is GLC 3 pro
 
 
-note: soon GLC 3 MAX will be released after short time after GLC 3 pro
+IN THE NEXT FEW DAYS THIS VERSION WOULD BE RELEASED ON FTCM AND OUR WEBSITE
+
+
+note: soon the most wanted version 'GLC 3 MAX' would be released
 
 
 ## new changes and features:
 
 
-**1-support for TurtleDB(a new programming language support)**
+**1-The world 'part' when starting or ending a code block is removed make the system of code blocks easier and smaller,faster,more efficient**
 
-**2-GLC now is faster and better and easier with it's triple-COLB-system program**
+**2-THE GREASTEST PROBLEM IN ALL OF GLC HAS BEEN SOLVED THE PSSAE HAS BEEN FIXED**
 
-**3-full support for code instead of only file now you can use either file or code to run and do another things like that**
+**3-THE CAROCO BAD SYSTEM AND IT'S PROBLEMS HAS BEEN SOLVED**
 
 **4-full support for parallel run🔥(this thing will let you control the space and time)**
 
