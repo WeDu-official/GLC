@@ -24,11 +24,13 @@ with open('options.txt', 'r') as options_Reader:
     options = options_Reader.read()
 def normal_function_mapping(code:str,function_mapping_variable:dict):
     # sourcery skip: missing-dict-items
-    lines2 = code.strip().split("\n")
+    lines2 = code.strip().split("""
+""")
     for s in range(len(lines2)):
         for short, full in function_mapping_variable:
             lines2[s] = lines2[s].replace(short, full)
-    return "\n".join(lines2)
+    return """
+""".join(lines2)
 def find_between(filepath,first_word, second_word, occurrence):
     with open(filepath, 'r') as file:
         lines = file.readlines()
@@ -56,7 +58,8 @@ def find_between(filepath,first_word, second_word, occurrence):
         return []  # If either first_word or second_word is not found in the file or occurrence is not found
 
 def find_between2(code:str,first_word, second_word, occurrence):
-    lines = code.strip().split("\n")
+    lines = code.strip().split("""
+""")
     first_line_number = None
     second_line_number = None
     count = 0
@@ -79,7 +82,8 @@ def find_between2(code:str,first_word, second_word, occurrence):
     else:
         return []  # If either first_word or second_word is not found in the file or occurrence is not found
 def find_between2_2(code:str,first_word, second_word, occurrence):
-    lines = code.split("\n")
+    lines = code.split("""
+""")
     first_line_number = None
     second_line_number = None
     count = 0
@@ -110,11 +114,12 @@ def find_between3(text, firstword, secondword):
     return text[start_index:end_index]
 
 def list_to_string(lst):
-    string = ''.join(lst)
-    return string.replace('\\n', '\n')
+    string = r''.join(lst)
+    return string
 def list_to_string2(lst):
-    string = '\n'.join(lst)
-    return string.replace('\\n', '\n')
+    string = (r'''
+''').join(lst)
+    return string
 def compile(mode:str,file_path:str,thecode:str,programminglanguage:str):
     command2 = ''
     options_Reader = open('options.txt', 'r')
@@ -178,7 +183,8 @@ def compile(mode:str,file_path:str,thecode:str,programminglanguage:str):
     if programminglanguage != 'python' and programminglanguage != 'C' and programminglanguage != 'c' and programminglanguage != 'java' and programminglanguage != 'javascript' and programminglanguage != 'JS' and programminglanguage != 'batch' and programminglanguage != 'kotlin' and programminglanguage != 'html' and programminglanguage != 'data':
         print("unknown programming language")
         exit()
-    lines = code.strip().split("\n")
+    lines = code.strip().split('''
+''')
     a = list(func_mapping_var)
     b = list(func_mapping_var2)
     for i in range(len(lines)):
@@ -200,27 +206,37 @@ def compile(mode:str,file_path:str,thecode:str,programminglanguage:str):
             data3 = list_to_string(data_3)
             data_4 = find_between2(code, b[-5], b[-8], i + 1)
             data4 = list_to_string(data_4)
-        data1 = find_between2("\n".join(lines), b[-7], b[-6], i + 1)
+        data1 = find_between2("""
+""".join(lines), b[-7], b[-6], i + 1)
         data = list_to_string(data1)
-        data2 = find_between2("\n".join(lines), b[-5], b[-4], i + 1)
+        data2 = find_between2("""
+""".join(lines), b[-5], b[-4], i + 1)
         data_2 = list_to_string(data2)
-        data3 = find_between2("\n".join(lines), b[-7], b[-9], i + 1)
+        data3 = find_between2("""
+""".join(lines), b[-7], b[-9], i + 1)
         data_3 = list_to_string(data3)
-        data4 = find_between2("\n".join(lines), b[-5], b[-8], i + 1)
+        data4 = find_between2("""
+""".join(lines), b[-5], b[-8], i + 1)
         data_4 = list_to_string(data4)
-        semi_fin_lines = code.strip().split("\n")
-        code_texted = "\n".join(semi_fin_lines)
+        semi_fin_lines = code.strip().split("""
+""")
+        code_texted = """
+""".join(semi_fin_lines)
         goto = find_between3(code_texted, b[-7], b[-6])
         goto2 = find_between3(code_texted, b[-5], b[-4])
         goto3 = find_between3(code_texted, b[-7], b[-9])
         goto4 = find_between3(code_texted, b[-5], b[-8])
-        if goto == '' or goto == '\n' or goto == '\t' or goto == None:
+        if goto == '' or goto == """
+""" or goto == '\t' or goto == None:
             goto = ''
-        if goto2 == '' or goto2 == '\n' or goto2 == '\t' or goto2 == None:
+        if goto2 == '' or goto2 == """
+""" or goto2 == '\t' or goto2 == None:
             goto2 = ''
-        if goto3 == '' or goto3 == '\n' or goto3 == '\t' or goto3 == None:
+        if goto3 == '' or goto3 == """
+""" or goto3 == '\t' or goto3 == None:
             goto3 = ''
-        if goto4 == '' or goto4 == '\n' or goto4 == '\t' or goto4 == None:
+        if goto4 == '' or goto4 == """
+""" or goto4 == '\t' or goto4 == None:
             goto4 = ''
         tokens_shape = f'''$<
 {data}
@@ -345,80 +361,105 @@ def compile(mode:str,file_path:str,thecode:str,programminglanguage:str):
         if programminglanguage != 'python' and programminglanguage != 'C' and programminglanguage != 'c' and programminglanguage != 'java' and programminglanguage != 'javascript' and programminglanguage != 'JS' and programminglanguage != 'batch' and programminglanguage != 'kotlin' and programminglanguage != 'html' and programminglanguage != 'data':
             print("unknown programming language")
             exit()
-        if data != '' and data != '\n' and data != '\t':
+        if data != '' and data != '''
+''' and data != '\t':
             codes = code_texted.replace(tokens_shape, prt)
         if f'{b[-7]}{goto}{b[-6]}' in code_texted:
             codes = code_texted.replace(f'{b[-7]}{goto}{b[-6]}', prt2)
         else:
             codes = code_texted.replace(em_tokens_shape, token_message)
-        semi_fin_lines2 = codes.strip().split("\n")
-        code_texted2 = "\n".join(semi_fin_lines2)
-        if data_2 != '' and data_2 != '\n' and data_2 != '\t':
+        semi_fin_lines2 = codes.strip().split("""
+""")
+        code_texted2 = """
+""".join(semi_fin_lines2)
+        if data_2 != '' and data_2 != '''
+''' and data_2 != '\t':
             codes2 = code_texted2.replace(tokens_shape2, prt3)
         if f'{b[-5]}{goto2}{b[-4]}' in code_texted2:
             codes2 = code_texted2.replace(f'{b[-5]}{goto2}{b[-4]}', prt4)
         else:
             codes2 = code_texted2.replace(em_tokens_shape2, token_message2)
-        fin_lines = codes2.strip().split("\n")
-        code_texted3 = "\n".join(fin_lines)
-        if data_3 != '' and data_3 != '\n' and data_3 != '\t':
+        fin_lines = codes2.strip().split("""
+""")
+        code_texted3 = """
+""".join(fin_lines)
+        if data_3 != '' and data_3 != '''
+''' and data_3 != '\t':
             if SET_NO_STATEMENT_FUNCTION_CALLING == 'False':
                 codes3 = code_texted3.replace(function_shape, prt5)
             else:
-                lines = code_texted3.strip().split("\n")
+                lines = code_texted3.strip().split("""
+""")
                 for i in range(len(lines)):
                     for short, full in func_mapping_var:
                         lines[i] = lines[i].replace(short, full)
-                codes3 = "\n".join(lines)
+                codes3 = """
+""".join(lines)
         if f'{b[-7]}{goto3}{b[-9]}' in code_texted3:
             if SET_NO_STATEMENT_FUNCTION_CALLING == 'False':
                 codes3 = code_texted3.replace(f'{b[-7]}{goto3}{b[-9]}', prt6)
             else:
-                lines = code_texted3.strip().split("\n")
+                lines = code_texted3.strip().split("""
+""")
                 for i in range(len(lines)):
                     for short, full in func_mapping_var:
                         lines[i] = lines[i].replace(short, full)
-                codes3 = "\n".join(lines)
+                codes3 = """
+""".join(lines)
         else:
             if SET_NO_STATEMENT_FUNCTION_CALLING == 'False':
                 codes3 = code_texted3.replace(em_function_shape, token_message3)
             else:
-                lines = code_texted3.strip().split("\n")
+                lines = code_texted3.strip().split("""
+""")
                 for i in range(len(lines)):
                     for short, full in func_mapping_var:
                         lines[i] = lines[i].replace(short, full)
-                codes3 = "\n".join(lines)
-        fin_lines2 = codes3.strip().split("\n")
-        code_texted4 = "\n".join(fin_lines2)
-        if data_4 != '' and data_4 != '\n' and data_4 != '\t':
+                codes3 = """
+""".join(lines)
+        fin_lines2 = codes3.strip().split("""
+""")
+        code_texted4 = """
+""".join(fin_lines2)
+        if data_4 != '' and data_4 != '''
+''' and data_4 != '\t':
             if SET_NO_STATEMENT_FUNCTION_CALLING == 'False':
                 codes4 = code_texted4.replace(function_shape2, prt7)
             else:
-                lines = code_texted4.strip().split("\n")
+                lines = code_texted4.strip().split("""
+""")
+                print(lines)
                 for i in range(len(lines)):
                     for short, full in func_mapping_var:
                         lines[i] = lines[i].replace(short, full)
-                codes4 = "\n".join(lines)
+                codes4 = """
+""".join(lines)
         if f'{b[-5]}{goto4}{b[-8]}' in code_texted4:
             if SET_NO_STATEMENT_FUNCTION_CALLING == 'False':
                 codes4 = code_texted4.replace(f'{b[-5]}{goto4}{b[-8]}', prt8)
             else:
-                lines = code_texted4.strip().split("\n")
+                lines = code_texted4.strip().split("""
+""")
                 for i in range(len(lines)):
                     for short, full in func_mapping_var:
                         lines[i] = lines[i].replace(short, full)
-                codes4 = "\n".join(lines)
+                codes4 = """
+""".join(lines)
         else:
             if SET_NO_STATEMENT_FUNCTION_CALLING == 'False':
                 codes4 = code_texted4.replace(em_function_shape2, token_message4)
             else:
-                lines = code_texted4.strip().split("\n")
+                lines = code_texted4.strip().split("""
+""")
                 for i in range(len(lines)):
                     for short, full in func_mapping_var:
                         lines[i] = lines[i].replace(short, full)
-                codes4 = "\n".join(lines)
-        fin_lines3 = codes4.strip().split("\n")
-        codee2 = "\n".join(fin_lines3)
+                codes4 = """
+""".join(lines)
+        fin_lines3 = codes4.strip().split("""
+""")
+        codee2 = """
+""".join(fin_lines3)
         return codee2
 def runner(code:str,programminglanguage:str,CAROCO:int,PRDF:str='',parallelrun:bool=False,showrunmessage:bool=True,showmessageshowingwarnings:bool=False,returned:bool=False,datalogfilename:str=''):
     global programminglanguagefileformat,command,command2
@@ -492,24 +533,29 @@ def runner(code:str,programminglanguage:str,CAROCO:int,PRDF:str='',parallelrun:b
                 file2.write('')
             with open(f"{PRDF}", "w") as file:
                 file.write(f'{code}')
-            os.system(f'start cmd /k {command2}')
+            if CAROCO == 1:
+                os.system(f'start cmd /k {command2}')
         else:
-            subprocess.Popen(command, shell=True).wait()
+            if CAROCO == 1:
+                subprocess.Popen(command, shell=True).wait()
 
         y = int(time.strftime('%Y%d%d%H%M%S'))
 
         end_time = time.time()
         time_diff = end_time - start_time
-        if parallelrun == True and showrunmessage == True:
-            os.system(f"echo the {PRDF} file running by using parallel run🔥")
-        if parallelrun == False and showrunmessage == True:
-            print('note:running more than normal run like the all run_pre or else make the compiler')
-            print('shows the run time is add to the run time before it')
-            print(f"{programminglanguage.upper()} Finished in {time_diff:.3f} seconds")
-        if showmessageshowingwarnings == True and parallelrun == True and showrunmessage == True:
-            print('if the terminal or any another way to show the run message and you run the code')
-            print('by using parallel run you could found |?|')
-            print('this is because your terminal cannot show emojis (flame emoji)')
+        if CAROCO == 1:
+            if parallelrun == True and showrunmessage == True:
+                os.system(f"echo the {PRDF} file running by using parallel run🔥")
+            if parallelrun == False and showrunmessage == True:
+                print('note:running more than normal run like the all run_pre or else make the compiler')
+                print('shows the run time is add to the run time before it')
+                print(f"{programminglanguage.upper()} Finished in {time_diff:.3f} seconds")
+            if showmessageshowingwarnings == True and parallelrun == True and showrunmessage == True:
+                print('if the terminal or any another way to show the run message and you run the code')
+                print('by using parallel run you could found |?|')
+                print('this is because your terminal cannot show emojis (flame emoji)')
+        else:
+            print(f'The compiling process is 100% completed for runned_code{programminglanguagefileformat}')
         if returned == True:
             fooe = open("run_system_functions_AOC.txt", 'w')
             fooe.write(code)
@@ -547,8 +593,8 @@ def run(programminglanguage:str,CAROCO:int, returned:bool, file_path:str='', the
             with open(file_path, 'r') as f:
                 code1 = f.read()
                 for i in range(100000):
-                    if programminglanguage != 'all' and f'<{programminglanguage} part s>{i + 1}' in code1:
-                            code2 = list_to_string2(find_between2_2(code1,f'<{programminglanguage} part s>{i + 1}', f'<{programminglanguage} part e>{i + 1}', 1))
+                    if programminglanguage != 'all' and f'<{programminglanguage} s>{i + 1}' in code1:
+                            code2 = list_to_string2(find_between2_2(code1,f'<{programminglanguage} s>{i + 1}', f'<{programminglanguage} e>{i + 1}', 1))
                             py = open('run_system_functions_AOC.txt', 'a')
                             print(code2, file=py)
                             py.close()
@@ -558,13 +604,10 @@ def run(programminglanguage:str,CAROCO:int, returned:bool, file_path:str='', the
                 codeh.close()
                 x = int(time.strftime('%Y%d%d%H%M%S'))
                 code = compile('c','',helpercode,programminglanguage)
-                if returned == True and runned == False:
+                runner(code, programminglanguage, CAROCO, PRDF, Parallelrun, showrunmessage, showmessageshowingwarnings,
+                       returned, datalogfilename)  # type: ignore
+                if returned == True:
                     return code
-                if runned == True and returned == True:
-                    runner(code,programminglanguage,CAROCO,PRDF,Parallelrun,showrunmessage,showmessageshowingwarnings,returned,datalogfilename) # type: ignore
-                    return code
-                if runned == True and returned == False:
-                    runner(code,programminglanguage,CAROCO,PRDF,Parallelrun,showrunmessage,showmessageshowingwarnings,returned,datalogfilename) # type: ignore
                 closersfa = open('run_system_functions_AOC.txt', 'w')
                 closersfa.write('')
                 closersfa.close()    
@@ -572,8 +615,8 @@ def run(programminglanguage:str,CAROCO:int, returned:bool, file_path:str='', the
             print(f"The file '{file_path}' does not exist")
     else:
         for i in range(100000):
-            if f'<{programminglanguage} part s>{i + 1}' in thecode:
-                code1 = list_to_string2(find_between2(thecode, f'<{programminglanguage} part s>{i + 1}',f'<{programminglanguage} part e>{i + 1}', 1))
+            if f'<{programminglanguage} s>{i + 1}' in thecode:
+                code1 = list_to_string2(find_between2(thecode, f'<{programminglanguage} s>{i + 1}',f'<{programminglanguage} e>{i + 1}', 1))
                 py = open('run_system_functions_AOC.txt', 'a')
                 print(code1, file=py)
                 py.close()
@@ -583,13 +626,10 @@ def run(programminglanguage:str,CAROCO:int, returned:bool, file_path:str='', the
         codeh.close()
         x = int(time.strftime('%Y%d%d%H%M%S'))
         code = compile('c','',helpercode,programminglanguage)
-        if returned == True and runned == False:
+        runner(code, programminglanguage, CAROCO, PRDF, Parallelrun, showrunmessage, showmessageshowingwarnings,
+               returned, datalogfilename)  # type: ignore
+        if returned == True:
             return code
-        if runned == True and returned == True:
-            runner(code,programminglanguage,CAROCO,PRDF,Parallelrun,showrunmessage,showmessageshowingwarnings,returned,datalogfilename) # type: ignore
-            return code
-        if runned == True and returned == False:
-            runner(code,programminglanguage,CAROCO,PRDF,Parallelrun,showrunmessage,showmessageshowingwarnings,returned,datalogfilename) # type: ignore
         closersfa = open('run_system_functions_AOC.txt', 'w')
         closersfa.write('')
         closersfa.close()       

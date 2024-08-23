@@ -8,7 +8,7 @@ accidentally it will be replaced words in your code that you do want to be repla
 
 print("this called a cube not block")
 
-now this is now python code but if in func_mapping we have the word block as function name(func_mapping key):
+now this is now python code, but if in func_mapping we have the word block as function name(func_mapping key):
 
 func_mapping = {
 ...
@@ -18,31 +18,31 @@ func_mapping = {
 
 note:don't worry about '~1' I will explain it later
 
-it will be replaced with its value that means when the compiler start finding functions names operation
-and find there is function called block it will be replaced block with its value that is class
-our code it will be like this:
+it will be replaced with its value that means when the compiler starts finding functions names operation
+and find there is function called block, it will be replaced block with its value that is class
+our code, it will be like this:
 
 print("this called a cube not class")
 
-because we will get unexpected result when we run the code this is:
+because we will get an unexpected result when we run the code, this is:
 
-this called a cube not class
+this is called a cube not class
 
-this is unexpected result because we think the result it will be like this:
+this is an unexpected result because we think the result it will be like this:
 
-this called a cube not block
+this is called a cube not block
 
 there is way to avoid this problem while we're using no statement function calling
 note:it's not a practical way, but it's the only way
 that is at every word that is exactly the same function name inside it, we will put '~1' mark
 that if you notice this mark always you will find it in the last line of the func_mapping,
-and you must to never delete it or change it or change the place of it because this mark value is '' (nothing)
+and you must never delete it or change it or change the place of it because this mark value is '' (nothing)
 and if you know this compiler uses FTCVRB system or FTCVRBS(from to compiler vertical read based system)
 this is reading vertically that means it will be read at first the first line after it the second line and so on
 and because the compiler FTCVRBS when it will read the func_mapping it will read line by line and because the '~1' mark
 is the last function at the func_mapping it will be the last thing it will be read by the compiler and this is the
 important track because the compiler it will read our block function before '~1' mark snd because of that the compiler
-will never found the block function in our code but why this is simple example to explain:
+will never find the block function in our code but why this is simple example to explain:
 
 note:let '>' where the compiler reads the code
 note:the compiler will never read anything at is outside the value of func_mapping variable
@@ -76,25 +76,25 @@ now this is our code with '~1' mark:
 
 print("this called a cube not blo~1ck")
 
-when the compiler try to find the function that it read it now inside our code
+when the compiler try to find the function that it reads it now inside our code
 and finally reads the block function key and value and try to find the function key inside or code
-it will never find block word because there is no block word in our code because our code have blo~1ck word not block
+it will never find block word because there is no block word in our code because our code has blo~1ck word not block
 word because of that it will read the next function and our code will stay the same, now after all of that
 when the compiler finally reads the last function that is '~1' mark it will find it in our code because it found in the
 word blo~1ck because of that the compiler will replace the '~1' mark with its value that is ''(nothing) that means the
-'~1' mark it will be deleted from our code and this is the end even if our code after ~1 being deleted and now their is
-block word instead of blo~1ck but nothing will happening because when the turn of the block function happen and never
+'~1' mark it will be deleted from our code and this is the end even if our code after ~1 being deleted and now there is
+block word instead of blo~1ck but nothing will happen because when the turn of the block function happens and never
 found a block word in our code this is the end of block function(nothing matters after the turn was over because even
 if their is block word after the turn was over nothing will happen to our block word).
 
-and because of that when we run our code the result will be like this:
+and because of that, when we run our code, the result will be like this:
 
-this called a cube not block
+this is called a cube not block
 
-finally we got the result that we want.
+finally, we got the result that we want.
 
-when you set no statement function calling is False(recommended) when you want to call a function
-you need to make function block and this is simple list that contains all the functions blocks in GLC with explain
+when you set no statement function, calling is False(recommended) when you want to call a function
+you need to make function block, and this is a simple list that contains all the functions blocks in GLC with explaining
 for all of them:
 $<
 code
@@ -120,4 +120,4 @@ this block
 this is single line function block that returns the value of the functions that are inside
 this block
 
-note:if you want you can use '~1' but is not really useful it works but not that useful
+note:if you want, you can use '~1' but it is not really useful it works but not that useful

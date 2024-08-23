@@ -108,8 +108,8 @@ class blockfunctions():
         self.filepath = filepath
         self.linenumber = where
         self.comment = comment
-        self.blockstarter1 = f'{self.comment}<{blockinfo[0]} part s>{blockinfo[1]}'
-        self.blockender1 = f'{self.comment}<{blockinfo[0]} part e>{blockinfo[1]}'
+        self.blockstarter1 = f'{self.comment}<{blockinfo[0]} s>{blockinfo[1]}'
+        self.blockender1 = f'{self.comment}<{blockinfo[0]} e>{blockinfo[1]}'
         self.blockstarter = self.blockstarter1
         self.blockender = self.blockender1
         if self.comment == None:
@@ -129,8 +129,8 @@ class blockfunctions():
         self.filepath = filepath
         self.linenumber = where
         self.comment = comment
-        self.blockstarter1 = f'{self.comment}<{blockinfo[0]} part s>{blockinfo[1]}'
-        self.blockender1 = f'{self.comment}<{blockinfo[0]} part e>{blockinfo[1]}'
+        self.blockstarter1 = f'{self.comment}<{blockinfo[0]} s>{blockinfo[1]}'
+        self.blockender1 = f'{self.comment}<{blockinfo[0]} e>{blockinfo[1]}'
         self.blockstarter = self.blockstarter1
         self.blockender = self.blockender1
         if self.comment == None:
@@ -146,8 +146,8 @@ class blockfunctions():
     def blockfile(self, file_name: str, blockinfo: list, datatransferfile: str, datatransferfileformat: str):
         self.filepath = file_name
         self.openedfile = open(self.filepath, 'r')
-        self.blockmodule = f'<{blockinfo[0]} part s>{blockinfo[1]}'
-        self.blockmodule1 = f'<{blockinfo[0]} part e>{blockinfo[1]}'
+        self.blockmodule = f'<{blockinfo[0]} s>{blockinfo[1]}'
+        self.blockmodule1 = f'<{blockinfo[0]} e>{blockinfo[1]}'
         if self.blockmodule in self.openedfile.read():
             self.code1 = self.find_between(self.filepath, self.blockmodule, self.blockmodule1, 1)
             self.code2 = self.list_to_string(self.code1)
@@ -173,8 +173,8 @@ class blockfunctions():
             someinfo = []
         self.filepath = file_name
         self.openedfile = open(self.filepath, 'r')
-        self.blockmodule = f'<{blockinfo[0]} part s>{blockinfo[1]}'
-        self.blockmodule1 = f'<{blockinfo[0]} part e>{blockinfo[1]}'
+        self.blockmodule = f'<{blockinfo[0]} s>{blockinfo[1]}'
+        self.blockmodule1 = f'<{blockinfo[0]} e>{blockinfo[1]}'
         if self.blockmodule in self.openedfile.read():
             self.code1 = self.find_between(self.filepath, self.blockmodule, self.blockmodule1, 1)
             self.code2 = self.list_to_string(self.code1)
@@ -238,8 +238,8 @@ class blockfunctions():
         if someinfo is None:
             someinfo = []
         self.code = code
-        self.blockmodule = f'<{blockinfo[0]} part s>{blockinfo[1]}'
-        self.blockmodule1 = f'<{blockinfo[0]} part e>{blockinfo[1]}'
+        self.blockmodule = f'<{blockinfo[0]} s>{blockinfo[1]}'
+        self.blockmodule1 = f'<{blockinfo[0]} e>{blockinfo[1]}'
         if self.blockmodule in self.code:
             self.code1 = self.find_betweencode(self.code, self.blockmodule, self.blockmodule1, holder, holderexists, 1)
             self.code2 = self.list_to_string(self.code1)
@@ -322,8 +322,8 @@ class blockfunctions():
                 datatransferfileformat = datatransferfileformat__[i]
                 self.openedfile = open(self.filepath, 'r')
                 blockinfo = blockinfo_[i]
-                self.blockmodule = f'<{blockinfo[0]} part s>{blockinfo[1]}'
-                self.blockmodule1 = f'<{blockinfo[0]} part e>{blockinfo[1]}'
+                self.blockmodule = f'<{blockinfo[0]} s>{blockinfo[1]}'
+                self.blockmodule1 = f'<{blockinfo[0]} e>{blockinfo[1]}'
                 if self.blockmodule in self.openedfile.read():
                     self.code1 = self.find_between(self.filepath, self.blockmodule, self.blockmodule1, 1)
                     self.code2 = self.list_to_string(self.code1)
@@ -413,8 +413,8 @@ class blockfunctions():
                 datatransferfile = datatransferfile__[i]
                 datatransferfileformat = datatransferfileformat__[i]
                 blockinfo = blockinfo_[i]
-                self.blockmodule = f'<{blockinfo[0]} part s>{blockinfo[1]}'
-                self.blockmodule1 = f'<{blockinfo[0]} part e>{blockinfo[1]}'
+                self.blockmodule = f'<{blockinfo[0]} s>{blockinfo[1]}'
+                self.blockmodule1 = f'<{blockinfo[0]} e>{blockinfo[1]}'
                 if self.blockmodule in self.code:
                     self.code1 = self.find_betweencode(self.code, self.blockmodule, self.blockmodule1, holder, holderexists, 1)
                     self.code2 = self.list_to_string(self.code1)
