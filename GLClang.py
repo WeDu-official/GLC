@@ -155,7 +155,7 @@ def parallelrunfilesgenrator(filename:str,fileformat:str):
     parallelrunfilesgen(filename,fileformat)
 def GLC_filegenrator(file_name_without_file_format:str,Python_PRDF:bool=False,C_PRDF:bool=False,Java_PRDF:bool=False,JS_PRDF:bool=False,HTML_PRDF:bool=False,Batch_PRDF:bool=False,Kotlin_PRDF:bool=False):
     GLCfilegenrator(file_name_without_file_format,Python_PRDF,C_PRDF,Java_PRDF,JS_PRDF,HTML_PRDF,Batch_PRDF,Kotlin_PRDF)
-def GLC_filegenrator2(file_name_without_file_format:str,Python_PRDF:bool=False,C_PRDF:bool=False,Java_PRDF:bool=False,JS_PRDF:bool=False,HTML_PRDF:bool=False,Batch_PRDF:bool=False,Kotlin_PRDF:bool=False):
+def GLC_filegenrator2(file_name_without_file_format:str,Python_PRDF:bool=True,C_PRDF:bool=True,Java_PRDF:bool=True,JS_PRDF:bool=True,HTML_PRDF:bool=True,Batch_PRDF:bool=True,Kotlin_PRDF:bool=True):
     GLCfilegenrator2(file_name_without_file_format,Python_PRDF,C_PRDF,Java_PRDF,JS_PRDF,HTML_PRDF,Batch_PRDF,Kotlin_PRDF)
 def restart():
     """this function restarts main.gcf or main.PLFF"""
