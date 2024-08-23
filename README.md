@@ -1,10 +1,9 @@
 ## this is GLC 3 pro
 
+THIS IS THE LAST GLC VERSION AND FROM TODAY TO UNKNOWN DATE IT WOULD BE ARCHIVED
+~~IN THE NEXT FEW DAYS THIS VERSION WOULD BE RELEASED ON FTCM AND OUR WEBSITE~~
 
-IN THE NEXT FEW DAYS THIS VERSION WOULD BE RELEASED ON FTCM AND OUR WEBSITE
-
-
-note: soon the most wanted version 'GLC 3 MAX' would be released
+~~note: soon the most wanted version 'GLC 3 MAX' would be released~~
 
 
 ## new changes and features:
