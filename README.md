@@ -16,40 +16,9 @@ note: soon the most wanted version 'GLC 3 MAX' would be released
 
 **3-THE CAROCO BAD SYSTEM AND IT'S PROBLEMS HAS BEEN SOLVED**
 
-**4-full support for parallel run🔥(this thing will let you control the space and time)**
-
-**5-block_functions finally completed(finally you can control on code blocks)**
-
-**6-finally everything is work with it's miximum power**
-
-**7-GLC.py and convrun,shortcutfunc.py, teleport_files all of them removed from this version**
-
-**8-run_system_functions.py and GLClang.py, block_fun.py, this file(README.md),all of ...APFL.py files got an update(contains compiling anf system changes with new feature and GLClang got some new functions and changes to help you)**
-
-**9-there are some changes: in some of the parameters of some functions and in GLClang and etc... to make the commanding system better**
-
-**note:there are a lot of other changes and features but from how much I worked and spent time on it I forgot the old changes and features that I had done**
-
-### changes outside GLC but they are related to it
-
-
-**1-compiler documention.pdf deleted**
-
-
-**2-little changes in GLCprojectcreator.py**
-
-## cool notes:
-
-**all of bugs being fixed(TRUE)**
-
-**finally kotlin and C support being very good like the python ones or the batch one**
-
-
 **note:this is our plans for things that will be found in GLC 4 or little more:**
 
-
 **1-update the strike and OSL**
-
 
 **2-more changes in FTCM**
 
